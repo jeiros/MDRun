@@ -1,0 +1,21 @@
+{
+    "pbs_settings": { 
+        "walltime": "192:00:0",
+        "nnodes": 1,
+        "ncpus": 1,
+        "ngpus": 1,
+        "mem":"2000mb",
+        "host":"cx1-51-6-1",
+        "queue":"pqigould",
+        "email":"je714@ic.ac.uk"
+    },
+    "simulation_details": {
+        "system_name": "WT_cTn",
+        "inpcrd_file": "",
+        "topology_file": "WT_cTn.prmtop",
+        "start_time": 0,
+        "final_time": 200,
+        "job_length": 50,
+        "job_directory": "/work/je714/WT"
+    }
+}
