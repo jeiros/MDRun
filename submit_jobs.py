@@ -112,9 +112,9 @@ def write_MDscript(job_number, json, timeList):
 
 
 def get_NumberOfJobs(json):
-    total_lenght = json['simulation_details']['final_time'] - json['simulation_details']['start_time']
+    total_time = json['simulation_details']['final_time'] - json['simulation_details']['start_time']
     job_length = json['simulation_details']['job_length']
-    return(int(total_lenght/job_length) + 1)
+    return(int(total_time/job_length) + 1)
 
 
 def get_Times(number_of_jobs, job_length, start_time):
