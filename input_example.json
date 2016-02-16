@@ -10,12 +10,17 @@
         "email":"je714@ic.ac.uk"
     },
     "simulation_details": {
-        "system_name": "WT_cTn",
-        "inpcrd_file": "",
-        "topology_file": "WT_cTn.prmtop",
+        "system_name": "WT-ff14SB_run8",
+        "inpcrd_file": "WT-ff14SB.inpcrd",
+        "topology_file": "WT-ff14SB_hmr.prmtop",
         "start_time": 0,
-        "final_time": 200,
-        "job_length": 50,
+        "final_time": 100,
+        "job_length": 10,
         "job_directory": "/work/je714/WT"
+    }, 
+    "local_machine":{
+        "user": "je714",
+        "hostname": "ch-knuth.ch.ic.ac.uk",
+        "destination" : "/Users/je714/Troponin/IAN_Troponin/completehowarthcut/salted/ff14SB/run8"
     }
 }
