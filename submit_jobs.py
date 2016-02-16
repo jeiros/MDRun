@@ -111,18 +111,6 @@ def write_MDscript(job_number, json, timeList):
                                                                            json['local_machine']['destination']))
 
 
- # /home/igould/pmemd.cuda_SPFP -O -i premin.in -o premin_${count}_${cluster}.out -c $inpcrd -p $prmtop -r premin_${count}_${cluster}.rst  -ref $inpcrd
-
- # /home/igould/pmemd.cuda_SPFP -O -i sandermin1.in -o sandermin_${count}_${cluster}.out -c premin_${count}_${cluster}.rst -p $prmtop -r sandermin1_${count}_${cluster}.rst
-
- # /home/igould/pmemd.cuda_SPFP -O -i 02_Heat.in -o 02_Heat_${count}_${cluster}.out -c sandermin1_${count}_${cluster}.rst -p $prmtop -r 02_Heat_${count}_${cluster}.rst -x 02_Heat_$    {count}_${cluster}.nc -ref sandermin1_${count}_${cluster}.rst
-
- # /home/igould/pmemd.cuda_SPFP -O -i 03_Heat2.in -o 03_Heat2_${count}_${cluster}.out -c 02_Heat_${count}_${cluster}.rst -p $prmtop -r 03_Heat2_${count}_${cluster}.rst -x 03_Heat2_    ${count}_${cluster}.nc -ref 02_Heat_${count}_${cluster}.rst
-
-
-
-
-
 def get_NumberOfJobs(json):
     total_lenght = json['simulation_details']['final_time'] - json['simulation_details']['start_time']
     job_length = json['simulation_details']['job_length']
@@ -150,7 +138,6 @@ def get_Times(number_of_jobs, job_length, start_time):
 details = read_jsonfile(sys.argv[1])
 dictionary = get_Times(get_NumberOfJobs(details), details['simulation_details']['job_length'], details['simulation_details']['start_time'])
 
-print(dictionary)
 
 for i in range(1, get_NumberOfJobs(details)):
     write_PBSheader(i, details)
