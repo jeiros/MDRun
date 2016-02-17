@@ -10,12 +10,12 @@
         "email":"je714@ic.ac.uk"
     },
     "simulation_details": {
-        "system_name": "WT-ff14SB_run8",
+        "system_name": "WT_run8",
         "inpcrd_file": "WT-ff14SB.inpcrd",
         "topology_file": "WT-ff14SB_hmr.prmtop",
         "start_time": 0,
-        "final_time": 100,
-        "job_length": 10,
+        "final_time": 1000,
+        "job_length": 100,
         "job_directory": "/work/je714/WT"
     }, 
     "local_machine":{
