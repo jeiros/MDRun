@@ -46,7 +46,7 @@ def write_MDscript(job_number, json, timeList):
         file.write("tar -zcvf %s/results/%s_${sim}ns.tgz *\n\n"
                    % (json['simulation_details']['job_directory'],
                       json['simulation_details']['system_name']))
-        file.write("scp %s/results/%s_${sim}ns.tgz %s@%s:%s/\n"
+        file.write("rsync -avz --remove-source-files %s/results/%s_${sim}ns.tgz %s@%s:%s/\n"
                    % (json['simulation_details']['job_directory'],
                       json['simulation_details']['system_name'],
                       json['local_machine']['user'],

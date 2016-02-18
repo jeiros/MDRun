@@ -15,7 +15,7 @@ def write_PBSheader(job_number, json):
                       json['pbs_settings']['mem'],
                       json['pbs_settings']['gpu_type']))
     elif json['pbs_settings']['queue'] == 'pqigould':
-        file.write("PBS -lselect=%s:ncpus=%s:ngpus=%s:mem=%s:host=%s\n"
+        file.write("#PBS -lselect=%s:ncpus=%s:ngpus=%s:mem=%s:host=%s\n"
                    % (json['pbs_settings']['nnodes'],
                       json['pbs_settings']['ncpus'],
                       json['pbs_settings']['ngpus'],
