@@ -63,3 +63,7 @@ target/
 
 # OS shit
 .DS_Store
+
+# Submission files
+*.pbs
+
