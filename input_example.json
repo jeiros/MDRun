@@ -15,9 +15,9 @@
         "inpcrd_file": "noCAL_WT-ff14SB_25-20-35Abox.inpcrd",
         "topology_file": "noCAL_WT-ff14SB_25-20-35Abox_hmr.prmtop",
         "start_time": 0,
-        "final_time": 450,
-        "job_length": 45,
-        "job_directory": "/work/je714/noCAL_WT"
+        "final_time": 18,
+        "job_length": 9,
+        "job_directory": "/work/je714/noCAL_WT/run9"
     }, 
     "local_machine":{
         "user": "je714",
