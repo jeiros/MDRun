@@ -1,5 +1,6 @@
 #!/bin/bash
-
+# Iterates over the submission files and launches them sequentially with 
+# qsub.
 first=true
 for file in *job*.pbs; do
     if [ "$first" = true ]; then
