@@ -24,6 +24,7 @@ def write_PBSheader(job_number, json):
     else:
         sys.exit("Supported queues are 'pgigould' or 'gpgpu' only.")
 
+    file.write("#PBS -lwalltime=%s\n" % json['pbs_settings']['walltime'])
     file.write("#PBS -q %s\n" % json['pbs_settings']['queue'])
     file.write("#PBS -M %s\n" % json['pbs_settings']['email'])
     file.write("#PBS -m abe\n\n")
