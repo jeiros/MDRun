@@ -1,26 +1,27 @@
 {
     "pbs_settings": { 
-        "walltime": "192:00:0",
+        "walltime": "72:0:0",
         "nnodes": 1,
         "ncpus": 1,
         "ngpus": 1,
-        "mem":"2000mb",
+        "mem":"1000mb",
         "host":"cx1-51-6-1",
-        "queue":"pqigould",
+        "queue":"gpgpu",
+        "gpu_type":"K80",
         "email":"je714@ic.ac.uk"
     },
     "simulation_details": {
-        "system_name": "WT_run8",
-        "inpcrd_file": "WT-ff14SB.inpcrd",
-        "topology_file": "WT-ff14SB_hmr.prmtop",
+        "system_name": "noCALWT-run9",
+        "inpcrd_file": "noCAL_WT-ff14SB_25-20-35Abox.inpcrd",
+        "topology_file": "noCAL_WT-ff14SB_25-20-35Abox_hmr.prmtop",
         "start_time": 0,
-        "final_time": 1000,
-        "job_length": 100,
-        "job_directory": "/work/je714/WT"
+        "final_time": 450,
+        "job_length": 45,
+        "job_directory": "/work/je714/noCAL_WT"
     }, 
     "local_machine":{
         "user": "je714",
         "hostname": "ch-knuth.ch.ic.ac.uk",
-        "destination" : "/Users/je714/Troponin/IAN_Troponin/completehowarthcut/salted/ff14SB/run8"
+        "destination" : "/Users/je714/Troponin/IAN_Troponin/completehowarthcut/noCAL_WT/run9"
     }
 }
