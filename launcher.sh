@@ -1,7 +1,7 @@
 #!/bin/bash
 
 first=true
-for file in *job*.sh; do
+for file in *job*.pbs; do
     if [ "$first" = true ]; then
         first=false
         ID=$(qsub $file)

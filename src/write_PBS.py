@@ -4,8 +4,8 @@ def write_PBSheader(job_number, json):
     Writes the header with the PBS information
     """
     job_str = str(job_number).zfill(2)
-    file = open("%s_job%s.sh" % (json['simulation_details']['system_name'],
-                                 job_str), "w")
+    file = open("%s_job%s.pbs" % (json['simulation_details']['system_name'],
+                                  job_str), "w")
 
     if json['pbs_settings']['queue'] == 'gpgpu':
         file.write("#PBS -lselect=%s:ncpus=%s:ngpus=%s:mem=%s:gpu_type=%s\n"

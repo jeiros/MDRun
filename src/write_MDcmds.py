@@ -1,7 +1,7 @@
 def write_MDscript(job_number, json, timeList):
     job_str = str(job_number).zfill(2)
-    with open("%s_job%s.sh" % (json['simulation_details']['system_name'],
-                               job_str), "a") as file:
+    with open("%s_job%s.pbs" % (json['simulation_details']['system_name'],
+                                job_str), "a") as file:
 
         file.write("module load cuda/6.5.19\n\n")
         file.write("prmtop=%s\n" % json['simulation_details']['topology_file'])
@@ -44,11 +44,11 @@ def write_MDscript(job_number, json, timeList):
             file.write("rm /tmp/pbs.${PBS_JOBID}/${prevrst}\n")
 
         file.write("tar -zcvf %s/results/%s_${sim}ns.tgz *\n\n"
-                       % (json['simulation_details']['job_directory'],
-                          json['simulation_details']['system_name']))
-            file.write("scp %s/results/%s_${sim}ns.tgz \ \n\t%s@%s:%s/"
-                       % (json['simulation_details']['job_directory'],
-                          json['simulation_details']['system_name'],
-                          json['local_machine']['user'],
-                          json['local_machine']['hostname'],
-                          json['local_machine']['destination']))
+                   % (json['simulation_details']['job_directory'],
+                      json['simulation_details']['system_name']))
+        file.write("scp %s/results/%s_${sim}ns.tgz %s@%s:%s/\n"
+                   % (json['simulation_details']['job_directory'],
+                      json['simulation_details']['system_name'],
+                      json['local_machine']['user'],
+                      json['local_machine']['hostname'],
+                      json['local_machine']['destination']))
