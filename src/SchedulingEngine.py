@@ -27,3 +27,7 @@ class PBSEngine(SchedulingEngine):
         self.pbs_headers += "#PBS -m abe\n\n"
 
         return(self.pbs_headers)
+
+class OpenLavaEngine(SchedulingEngine):
+    def generate_headers(self):
+        pass
