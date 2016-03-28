@@ -3,6 +3,7 @@ import json
 import sys
 from src.write_MDcmds import write_MDscript
 from src.write_PBS import write_PBSheader
+from src.Simulation import Simulation
 import argparse
 
 parser = argparse.ArgumentParser(usage="{} input_file.json".format(sys.argv[0]),
@@ -21,7 +22,6 @@ def read_jsonfile(file):
         json_data = json.load(data)
     return(json_data)
 
-
 def get_NumberOfJobs(json):
     total_time = json['simulation_details']['final_time'] - json['simulation_details']['start_time']
     job_length = json['simulation_details']['job_length']
@@ -29,7 +29,6 @@ def get_NumberOfJobs(json):
         sys.exit("Job lenght must be a divisor of total simulation time.")
     else:
         return(int(total_time/job_length) + 1)
-
 
 def get_Times(number_of_jobs, job_length, start_time):
     """
@@ -48,18 +47,19 @@ def get_Times(number_of_jobs, job_length, start_time):
         timeList[job] = '-'.join(seq)
     return(timeList)
 
-
 def main():
     if args:
         input_file = read_jsonfile(args.InputFile)
-        dictionary = get_Times(get_NumberOfJobs(input_file),
-                               input_file['simulation_details']['job_length'],
-                               input_file['simulation_details']['start_time'])
-        print(dictionary)
-        for i in range(1, get_NumberOfJobs(input_file)):
-            write_PBSheader(i, input_file)
-            write_MDscript(i, input_file, dictionary)
+        simulation = Simulation(input_file)
+        simulation.generateSimulationFiles()
 
+        # dictionary = get_Times(get_NumberOfJobs(input_file),
+        #                        input_file['simulation_details']['job_length'],
+        #                        input_file['simulation_details']['start_time'])
+        # print(dictionary)
+        # for i in range(1, get_NumberOfJobs(input_file)):
+        #     write_PBSheader(i, input_file)
+        #     write_MDscript(i, input_file, dictionary)
 
 if __name__ == "__main__":
     main()

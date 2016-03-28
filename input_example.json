@@ -1,5 +1,5 @@
 {
-    "pbs_settings": { 
+    "pbs_settings": {
         "walltime": "72:0:0",
         "nnodes": 1,
         "ncpus": 1,
@@ -15,10 +15,17 @@
         "inpcrd_file": "noCAL_WT-ff14SB_25-20-35Abox.inpcrd",
         "topology_file": "noCAL_WT-ff14SB_25-20-35Abox_hmr.prmtop",
         "start_time": 0,
-        "final_time": 18,
-        "job_length": 9,
-        "job_directory": "/work/je714/noCAL_WT/run10"
-    }, 
+        "final_time": 500,
+        "job_length": 10,
+        "job_directory": "/work/je714/noCAL_WT/run10",
+        "start_rst": "03_Heat2.rst",
+        "pre_simulation_cmd": [
+            "/home/igould/newamber/amber/bin/pmemd.cuda_SPFP -O -i premin.in -o premin.out -c ${inpcrd} -p ${prmtop} -r premin.rst -ref ${inpcrd}",
+            "/home/igould/newamber/amber/bin/pmemd.cuda_SPFP -O -i sandermin1.in -o sandermin1.out -c premin.rst -p ${prmtop} -r sandermin1.rst",
+            "/home/igould/newamber/amber/bin/pmemd.cuda_SPFP -O -i 02_Heat.in -o 02_Heat.out -c sandermin1.rst -p ${prmtop} -r 02_Heat.rst -ref sandermin1.rst -x 02_Heat.nc",
+            "/home/igould/newamber/amber/bin/pmemd.cuda_SPFP -O -i 03_Heat2.in -o 03_Heat2.out -c 02_Heat.rst -p ${prmtop} -r 03_Heat2.rst -ref 02_Heat.rst -x 03_Heat2.nc"
+        ]
+    },
     "local_machine":{
         "user": "je714",
         "hostname": "ch-knuth.ch.ic.ac.uk",
