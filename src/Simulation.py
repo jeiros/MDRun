@@ -46,7 +46,14 @@ class Simulation:
         if self.needs_pre_simulation_file:
             self._generate_pre_simulation_file()
 
-        print(self._get_Times())
+        times = self._get_Times()
+
+        for key, value in times.iteritems():
+            _generate_step_file(key, value)
+
+    def _generate_step_file(self, key, value):
+        # Fer les coses
+        pass
 
     def _generate_pre_simulation_file(self):
         self.pre_simulation_cmds_rendered = ""
