@@ -3,6 +3,10 @@ class SchedulingEngine:
         self.pbs_headers = ""
         self.simulation = simulation
 
+    @abstractmethod
+    def generate_headers(self):
+        pass
+
 class PBSEngine(SchedulingEngine):
     def generate_headers(self):
         self.pbs_headers = "#PBS -lselect=%s:" % self.simulation.nnodes
