@@ -55,6 +55,6 @@ class Simulation:
         print(self.pbs_headers)
 
     def _generate_pre_simulation_file(self):
-        pass
-
-
+        self.pre_simulation_cmds_rendered = ""
+        for cmd in pre_simulation_cmd:
+            self.pre_simulation_cmds_rendered += cmd + "\n"
