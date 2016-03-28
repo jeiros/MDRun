@@ -1,9 +1,3 @@
-#PBS -lselect=1:ncpus=1:ngpus=1:mem=1000mb:gpu_type=K80
-#PBS -lwalltime=72:0:0
-#PBS -q gpgpu
-#PBS -M je714@ic.ac.uk
-#PBS -m abe
-
 prmtop=noCAL_WT-ff14SB_25-20-35Abox_hmr.prmtop
 inpcrd=noCAL_WT-ff14SB_25-20-35Abox.inpcrd
 

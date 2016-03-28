@@ -46,16 +46,15 @@ class Simulation:
         if self.needs_pre_simulation_file:
             self._generate_pre_simulation_file()
 
+        print(self._get_Times())
+
     def _generate_pre_simulation_file(self):
         self.pre_simulation_cmds_rendered = ""
 
         self.pre_simulation_cmds_rendered += "prmtop=%s\n" % self.topology_file
         self.pre_simulation_cmds_rendered += "inpcrd=%s\n\n" % self.inpcrd_file
 
-        self.pre_simulation_cmds_rendered += self.work_directory_cmd
-        self.pre_simulation_cmds_rendered += "cp %s/*.in .\n" % self.job_directory
-        self.pre_simulation_cmds_rendered += "cp %s/${inpcrd} .\n" % self.job_directory
-        self.pre_simulation_cmds_rendered += "cp %s/${prmtop} .\n\n" % self.job_directory
+        self.pre_simulation_cmds_rendered += self._generate_move_files_cmd()
 
         for cmd in self.pre_simulation_cmd:
             self.pre_simulation_cmds_rendered += cmd + "\n"
@@ -65,25 +64,29 @@ class Simulation:
         file.close()
 
     def _generate_move_files_cmd(self):
-        pass
+        move = self.work_directory_cmd
+        move += "cp %s/*.in .\n" % self.job_directory
+        move += "cp %s/${inpcrd} .\n" % self.job_directory
+        move += "cp %s/${prmtop} .\n\n" % self.job_directory
+        return(move)
 
     def _get_NumberOfJobs(self):
         total_time = self.final_time - self.start_time
         if (total_time % self.job_length) != 0:
-            sys.exit("Job lenght must be a divisor of total simulation time.")
+            sys.exit("Job length must be a divisor of total simulation time.")
         else:
             return(int(total_time/self.job_length) + 1)
 
-    def _get_Times():
+    def _get_Times(self):
         timeList = {}
-        for job in range(1, self.get_NumberOfJobs()):
+        for job in range(1, self._get_NumberOfJobs()):
             if job == 1:
                 time_at_start = self.start_time
                 time_at_finish = time_at_start + self.job_length
             else:
                 time_at_finish = self.start_time + (job * self.job_length)
                 time_at_start = time_at_finish - self.job_length
-                seq = (str(time_at_start).zfill(4), str(time_at_finish).zfill(4))
-                timeList[job] = '-'.join(seq)
+            seq = (str(time_at_start).zfill(4), str(time_at_finish).zfill(4))
+            timeList[job] = '-'.join(seq)
         return(timeList)
 
