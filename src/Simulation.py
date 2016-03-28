@@ -1,9 +1,13 @@
 from src.SchedulingEngine import PBSEngine
+from src.SchedulingEngine import OpenLavaEngine
 
 class Simulation:
     def __init__(self, json):
         """Parsear json a propiedades de clase"""
-        self.scheduler = PBSEngine(self)
+        if json['scheduler'] == 'pbs':
+            self.scheduler = PBSEngine(self)
+        elif json['scheduler'] == 'openlava':
+            self.scheduler = OpenLavaEngine(self)
 
         # PBS settings
         self.queue_type = json['pbs_settings']['queue']
@@ -33,13 +37,28 @@ class Simulation:
         self.destination = json['local_machine']['destination']
 
     def generateSimulationFiles(self):
-        self._generate_scheduler_headers()
-        self._generate_pre_simulation_file()
-
-    def _generate_scheduler_headers(self):
         self.sch_headers = self.scheduler.generate_headers()
+        self.work_directory_cmd = self.scheduler.get_work_directory_cmd()
+
+        self._generate_pre_simulation_file()
 
     def _generate_pre_simulation_file(self):
         self.pre_simulation_cmds_rendered = ""
+
+        self.pre_simulation_cmds_rendered += "prmtop=%s\n" % self.topology_file
+        self.pre_simulation_cmds_rendered += "inpcrd=%s\n\n" % self.inpcrd_file
+
+        self.pre_simulation_cmds_rendered += self.work_directory_cmd
+        self.pre_simulation_cmds_rendered += "cp %s/*.in .\n" % self.job_directory
+        self.pre_simulation_cmds_rendered += "cp %s/${inpcrd} .\n" % self.job_directory
+        self.pre_simulation_cmds_rendered += "cp %s/${prmtop} .\n\n" % self.job_directory
+
         for cmd in self.pre_simulation_cmd:
             self.pre_simulation_cmds_rendered += cmd + "\n"
+
+        file = open("pre_simulation.sh", "w")
+        file.write(self.pre_simulation_cmds_rendered)
+        file.close()
+
+    def _generate_move_files_cmd(self):
+        pass

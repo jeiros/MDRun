@@ -3,10 +3,6 @@ class SchedulingEngine:
         self.pbs_headers = ""
         self.simulation = simulation
 
-    @abstractmethod
-    def generate_headers(self):
-        pass
-
 class PBSEngine(SchedulingEngine):
     def generate_headers(self):
         self.pbs_headers = "#PBS -lselect=%s:" % self.simulation.nnodes
@@ -28,6 +24,18 @@ class PBSEngine(SchedulingEngine):
 
         return(self.pbs_headers)
 
+    def get_work_directory_cmd(self):
+        return "cd /tmp/pbs.${PBS_JOBID}\n"
+
+    def generate_call_command(self):
+        pass
+
 class OpenLavaEngine(SchedulingEngine):
     def generate_headers(self):
+        pass
+
+    def get_work_directory_cmd(self):
+        pass
+
+    def generate_call_command(self):
         pass
