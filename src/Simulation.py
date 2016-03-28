@@ -1,4 +1,3 @@
-
 class Simulation:
     def __init__(self, json):
         """Parsear json a propiedades de clase"""
@@ -8,22 +7,27 @@ class Simulation:
         self.queue_type = json['pbs_settings']['queue']
         self.walltime = json['pbs_settings']['walltime']
         self.mail = json['pbs_settings']['email']
+        self.nnodes = json['pbs_settings']['nnodes']
+        self.ncpus = json['pbs_settings']['ncpus']
+        self.ngpus = json['pbs_settings']['ngpus']
+        self.memory = json['pbs_settings']['mem']
+        self.gpu_type = json['pbs_settings']['gpu_type']
+        self.host = json['pbs_settings']['host']
 
     def generateSimulationFiles(self):
         self._generate_PBS_headers()
         self._generate_pre_simulation_file()
 
-    def _generate_pqigould_headers(self):
-        pass
-
-    def _generate_gpgpu_headers(self):
-        pass
-
     def _generate_PBS_headers(self):
+        self.pbs_headers = "#PBS -lselect=%s:" % self.nnodes
+        self.pbs_headers += "ncpus=%s:" % self.ncpus
+        self.pbs_headers += "ngpus=%s:" % self.ngpus
+        self.pbs_headers += "mem=%s:" % self.memory
+
         if self.queue_type == 'gpgpu':
-            self._generate_gpgpu_headers()
+            self.pbs_headers += "gpu_type=%s\n" % self.gpu_type
         elif self.queue_type == 'pqigould':
-            self._generate_pqigould_headers()
+            self.pbs_headers += "host=%s\n" % self.host
         else:
             sys.exit("Supported queues are 'pgigould' or 'gpgpu' only.")
 
