@@ -29,6 +29,7 @@ class Simulation:
         self.job_length = json['simulation_details']['job_length']
         self.job_directory = json['simulation_details']['job_directory']
         self.start_rst = json['simulation_details']['start_rst']
+        self.pre_simulation_type = json['simulation_details']['pre_simulation_type']
         self.pre_simulation_cmd = json['simulation_details']['pre_simulation_cmd']
 
         # Local machine details
@@ -37,10 +38,13 @@ class Simulation:
         self.destination = json['local_machine']['destination']
 
     def generateSimulationFiles(self):
+        self.needs_pre_simulation_file = self.pre_simulation_type == "cpu"
+
         self.sch_headers = self.scheduler.generate_headers()
         self.work_directory_cmd = self.scheduler.get_work_directory_cmd()
 
-        self._generate_pre_simulation_file()
+        if self.needs_pre_simulation_file:
+            self._generate_pre_simulation_file()
 
     def _generate_pre_simulation_file(self):
         self.pre_simulation_cmds_rendered = ""
@@ -62,3 +66,24 @@ class Simulation:
 
     def _generate_move_files_cmd(self):
         pass
+
+    def _get_NumberOfJobs(self):
+        total_time = self.final_time - self.start_time
+        if (total_time % self.job_length) != 0:
+            sys.exit("Job lenght must be a divisor of total simulation time.")
+        else:
+            return(int(total_time/self.job_length) + 1)
+
+    def _get_Times():
+        timeList = {}
+        for job in range(1, self.get_NumberOfJobs()):
+            if job == 1:
+                time_at_start = self.start_time
+                time_at_finish = time_at_start + self.job_length
+            else:
+                time_at_finish = self.start_time + (job * self.job_length)
+                time_at_start = time_at_finish - self.job_length
+                seq = (str(time_at_start).zfill(4), str(time_at_finish).zfill(4))
+                timeList[job] = '-'.join(seq)
+        return(timeList)
+
