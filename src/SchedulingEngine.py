@@ -3,6 +3,7 @@ class SchedulingEngine:
         self.pbs_headers = ""
         self.simulation = simulation
 
+
 class PBSEngine(SchedulingEngine):
     def generate_headers(self):
         self.pbs_headers = "#PBS -lselect=%s:" % self.simulation.nnodes
@@ -19,7 +20,7 @@ class PBSEngine(SchedulingEngine):
 
         self.pbs_headers += "#PBS -lwalltime=%s\n" % self.simulation.walltime
         self.pbs_headers += "#PBS -q %s\n" % self.simulation.queue_type
-        self.pbs_headers += "#PBS -M %s\n" % self.simulation.mail
+        self.pbs_headers += "#PBS -M %s\n" % self.simulation.email
         self.pbs_headers += "#PBS -m abe\n\n"
 
         return(self.pbs_headers)
@@ -29,6 +30,7 @@ class PBSEngine(SchedulingEngine):
 
     def generate_call_command(self):
         pass
+
 
 class OpenLavaEngine(SchedulingEngine):
     def generate_headers(self):

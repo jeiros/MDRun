@@ -14,6 +14,7 @@ parser.add_argument("InputFile", help="A JSON file with the different options")
 
 args = parser.parse_args()
 
+
 def read_jsonfile(file):
     """
     Parse the input JSON file and return a dictionary with the info
@@ -22,19 +23,13 @@ def read_jsonfile(file):
         json_data = json.load(data)
     return(json_data)
 
+
 def main():
     if args:
         input_file = read_jsonfile(args.InputFile)
         simulation = Simulation(input_file)
         simulation.generateSimulationFiles()
 
-        # dictionary = get_Times(get_NumberOfJobs(input_file),
-        #                        input_file['simulation_details']['job_length'],
-        #                        input_file['simulation_details']['start_time'])
-        # print(dictionary)
-        # for i in range(1, get_NumberOfJobs(input_file)):
-        #     write_PBSheader(i, input_file)
-        #     write_MDscript(i, input_file, dictionary)
 
 if __name__ == "__main__":
     main()

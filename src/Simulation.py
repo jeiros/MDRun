@@ -1,9 +1,11 @@
 from src.SchedulingEngine import PBSEngine
 from src.SchedulingEngine import OpenLavaEngine
 
+
 class Simulation:
     def __init__(self, json):
-        """Parsear json a propiedades de clase"""
+        """Parse the information inside the JSON file into
+        class atributes."""
         if json['scheduler'] == 'pbs':
             self.scheduler = PBSEngine(self)
         elif json['scheduler'] == 'openlava':
@@ -12,7 +14,7 @@ class Simulation:
         # PBS settings
         self.queue_type = json['pbs_settings']['queue']
         self.walltime = json['pbs_settings']['walltime']
-        self.mail = json['pbs_settings']['email']
+        self.email = json['pbs_settings']['email']
         self.nnodes = json['pbs_settings']['nnodes']
         self.ncpus = json['pbs_settings']['ncpus']
         self.ngpus = json['pbs_settings']['ngpus']
@@ -48,23 +50,23 @@ class Simulation:
 
         times = self._get_Times()
 
-        for key, value in times.iteritems():
+        for key, value in times.items():
             if ((key == 1) and (self.start_time == 0) and
                (not self.needs_pre_simulation_file)):
                 self._generate_first_step_file(value)
             else:
                 self._generate_step_file(key, value)
 
-
     def _generate_step_file(self, key, value):
         # Fer les coses
 
-        # 
         if key == 1:
             # write the commands
             # use self.start_rst
+            pass
         else:
             # writeh the other commands
+            pass
 
     def _generate_first_step_file(self, value):
         pass
@@ -96,7 +98,7 @@ class Simulation:
         if (total_time % self.job_length) != 0:
             sys.exit("Job length must be a divisor of total simulation time.")
         else:
-            return(int(total_time/self.job_length) + 1)
+            return(int(total_time / self.job_length) + 1)
 
     def _get_Times(self):
         timeList = {}
@@ -110,4 +112,3 @@ class Simulation:
             seq = (str(time_at_start).zfill(4), str(time_at_finish).zfill(4))
             timeList[job] = '-'.join(seq)
         return(timeList)
-

@@ -20,7 +20,7 @@
         "job_length": 10,
         "job_directory": "/work/je714/noCAL_WT/run10",
         "start_rst": "03_Heat2.rst",
-        "pre_simulation_type": "gpu",
+        "pre_simulation_type": "cpu",
         "pre_simulation_cmd": [
             "/home/igould/newamber/amber/bin/pmemd.cuda_SPFP -O -i premin.in -o premin.out -c ${inpcrd} -p ${prmtop} -r premin.rst -ref ${inpcrd}",
             "/home/igould/newamber/amber/bin/pmemd.cuda_SPFP -O -i sandermin1.in -o sandermin1.out -c premin.rst -p ${prmtop} -r sandermin1.rst",
@@ -28,7 +28,7 @@
             "/home/igould/newamber/amber/bin/pmemd.cuda_SPFP -O -i 03_Heat2.in -o 03_Heat2.out -c 02_Heat.rst -p ${prmtop} -r 03_Heat2.rst -ref 02_Heat.rst -x 03_Heat2.nc"
         ]
     },
-    "local_machine":{
+    "local_machine": {
         "user": "je714",
         "hostname": "ch-knuth.ch.ic.ac.uk",
         "destination" : "/Users/je714/Troponin/IAN_Troponin/completehowarthcut/noCAL_WT/run10"
