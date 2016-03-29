@@ -15,7 +15,7 @@
         "system_name": "noCALWT-run10",
         "inpcrd_file": "noCAL_WT-ff14SB_25-20-35Abox.inpcrd",
         "topology_file": "noCAL_WT-ff14SB_25-20-35Abox_hmr.prmtop",
-        "start_time": 0,
+        "start_time": 100,
         "final_time": 500,
         "job_length": 10,
         "job_directory": "/work/je714/noCAL_WT/run10",

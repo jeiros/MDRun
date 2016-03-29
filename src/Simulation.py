@@ -49,10 +49,24 @@ class Simulation:
         times = self._get_Times()
 
         for key, value in times.iteritems():
-            _generate_step_file(key, value)
+            if ((key == 1) and (self.start_time == 0) and
+               (not self.needs_pre_simulation_file)):
+                self._generate_first_step_file(value)
+            else:
+                self._generate_step_file(key, value)
+
 
     def _generate_step_file(self, key, value):
         # Fer les coses
+
+        # 
+        if key == 1:
+            # write the commands
+            # use self.start_rst
+        else:
+            # writeh the other commands
+
+    def _generate_first_step_file(self, value):
         pass
 
     def _generate_pre_simulation_file(self):
