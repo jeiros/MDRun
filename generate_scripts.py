@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 import json
 import sys
-from src.write_MDcmds import write_MDscript
-from src.write_PBS import write_PBSheader
 from src.Simulation import Simulation
 import argparse
 
@@ -28,7 +26,7 @@ def main():
     if args:
         input_file = read_jsonfile(args.InputFile)
         simulation = Simulation(input_file)
-        simulation.generateSimulationFiles()
+        simulation.writeSimulationFiles()
 
 
 if __name__ == "__main__":

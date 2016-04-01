@@ -28,9 +28,11 @@ class PBSEngine(SchedulingEngine):
     def get_work_directory_cmd(self):
         return "cd /tmp/pbs.${PBS_JOBID}\n"
 
-    def generate_call_command(self):
-        pass
-
+    def get_afterProd_cmds(self):
+        self.afterProd_cmd = ""
+        self.afterProd_cmd += "cp /tmp/pbs.${PBS_JOBID}/%s_${sim}ns.rst %s/\n" % (self.simulation.system_name, self.simulation.job_directory)
+        self.afterProd_cmd += "rm /tmp/pbs.${PBS_JOBID}/${inpcrd}\n"
+        return(self.afterProd_cmd)
 
 class OpenLavaEngine(SchedulingEngine):
     def generate_headers(self):
@@ -39,5 +41,5 @@ class OpenLavaEngine(SchedulingEngine):
     def get_work_directory_cmd(self):
         pass
 
-    def generate_call_command(self):
+    def get_afterProd_cmds(self):
         pass

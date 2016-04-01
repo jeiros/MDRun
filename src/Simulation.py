@@ -31,6 +31,8 @@ class Simulation:
         self.job_length = json['simulation_details']['job_length']
         self.job_directory = json['simulation_details']['job_directory']
         self.start_rst = json['simulation_details']['start_rst']
+        self.cuda_version = json['simulation_details']['cuda_version']
+        self.binary_location = json['simulation_details']['binary_location']
         self.pre_simulation_type = json['simulation_details']['pre_simulation_type']
         self.pre_simulation_cmd = json['simulation_details']['pre_simulation_cmd']
 
@@ -39,59 +41,120 @@ class Simulation:
         self.hostname = json['local_machine']['hostname']
         self.destination = json['local_machine']['destination']
 
-    def generateSimulationFiles(self):
-        self.needs_pre_simulation_file = self.pre_simulation_type == "cpu"
+    def writeSimulationFiles(self):
+        needs_pre_simulation_file = (self.pre_simulation_type == "cpu")
 
         self.sch_headers = self.scheduler.generate_headers()
-        self.work_directory_cmd = self.scheduler.get_work_directory_cmd()
+        # If we do the pre-simulation commands specified in the JSON file
+        # then we write them to a file called pre_simulation.sh to run it
+        # on a local machine
+        if needs_pre_simulation_file:
+            self._write_pre_simulation_file()
 
-        if self.needs_pre_simulation_file:
-            self._generate_pre_simulation_file()
+        self.times = self._get_Times()
 
-        times = self._get_Times()
-
-        for key, value in times.items():
-            if ((key == 1) and (self.start_time == 0) and
-               (not self.needs_pre_simulation_file)):
-                self._generate_first_step_file(value)
+        for sim_number, time_interval in self.times.items():
+            if ((sim_number == 1) and (self.start_time == 0) and
+               (not needs_pre_simulation_file)):
+                print("The presimulation commands are going to be run on the HPC.\n")
+                # Only if the user wants to run the pre-simulation commands
+                # in a qsub script (in the HPC).
+                self._write_first_step_file(time_interval)
             else:
-                self._generate_step_file(key, value)
+                self._write_step_file(sim_number, time_interval)
 
-    def _generate_step_file(self, key, value):
-        # Fer les coses
+    def _write_step_file(self, sim_number, time_interval):
+        rendered_commands = self.sch_headers
+        rendered_commands += self._generate_preliminary_cmds(time_interval)
 
-        if key == 1:
-            # write the commands
-            # use self.start_rst
-            pass
+        if (sim_number == 1): 
+            rendered_commands += "prevrst=%s\n" % self.start_rst
         else:
-            # writeh the other commands
-            pass
+            rendered_commands += "prevrst=%s_%sns.rst\n" % (self.system_name, self.times[sim_number - 1])
 
-    def _generate_first_step_file(self, value):
-        pass
+        rendered_commands += "cp %s/${prevrst} .\n\n" % self.job_directory
+        rendered_commands += """pbsexec -grace 15 %s -O -i 05_Prod.in \\
+    -o %s_${sim}ns.out -c ${prevrst} -p ${prmtop} -r %s_${sim}ns.rst \\
+    -x 05_Prod_%s_${sim}ns.nc\n\n""" % (self.binary_location,
+                                        self.system_name,
+                                        self.system_name,
+                                        self.system_name)
+        rendered_commands += self._generate_final_cmds()
 
-    def _generate_pre_simulation_file(self):
-        self.pre_simulation_cmds_rendered = ""
-
-        self.pre_simulation_cmds_rendered += "prmtop=%s\n" % self.topology_file
-        self.pre_simulation_cmds_rendered += "inpcrd=%s\n\n" % self.inpcrd_file
-
-        self.pre_simulation_cmds_rendered += self._generate_move_files_cmd()
-
-        for cmd in self.pre_simulation_cmd:
-            self.pre_simulation_cmds_rendered += cmd + "\n"
-
-        file = open("pre_simulation.sh", "w")
-        file.write(self.pre_simulation_cmds_rendered)
+        file = open("%s_job%s.pbs" % (self.system_name,
+                                      str(sim_number).zfill(2)), "w")
+        file.write(rendered_commands)
         file.close()
 
-    def _generate_move_files_cmd(self):
-        move = self.work_directory_cmd
-        move += "cp %s/*.in .\n" % self.job_directory
-        move += "cp %s/${inpcrd} .\n" % self.job_directory
-        move += "cp %s/${prmtop} .\n\n" % self.job_directory
-        return(move)
+    def _write_first_step_file(self, time_interval):
+        simulation_cmds_rendered = self.sch_headers
+        simulation_cmds_rendered += "prmtop=%s\n" % self.topology_file
+        simulation_cmds_rendered += "inpcrd=%s\n\n" % self.inpcrd_file
+        simulation_cmds_rendered += self.scheduler.get_work_directory_cmd()
+        simulation_cmds_rendered += "cp %s/*.in .\n" % self.job_directory
+        simulation_cmds_rendered += "cp %s/${inpcrd} .\n" % self.job_directory
+        simulation_cmds_rendered += "cp %s/${prmtop} .\n\n" % self.job_directory
+        for cmd in self.pre_simulation_cmd:
+            simulation_cmds_rendered += cmd + "\n"
+        simulation_cmds_rendered += """pbsexec -grace 15 %s -O -i 05_Prod.in \\
+    -o %s_${sim}ns.out -c %s -p ${prmtop} -r %s_${sim}ns.rst \\
+    -x 05_Prod_%s_${sim}ns.nc\n\n""" % (self.binary_location,
+                                        self.system_name,
+                                        self.start_rst,
+                                        self.system_name,
+                                        self.system_name)
+        simulation_cmds_rendered += self._generate_final_cmds()
+
+        file = open("%s_job%s.pbs" % (self.system_name,
+                                      str(1).zfill(2)), "w")
+        file.write(simulation_cmds_rendered)
+        file.close()
+
+
+    def _write_pre_simulation_file(self):
+        """Write a bash script to do the pre simulation commands as specified
+        in the JSON file. Also specify what the prmtop and inprcrd files are
+        from the JSON.
+        """
+        pre_simulation_cmds_rendered = ""
+
+        pre_simulation_cmds_rendered += "prmtop=%s\n" % self.topology_file
+        pre_simulation_cmds_rendered += "inpcrd=%s\n\n" % self.inpcrd_file
+
+        for cmd in self.pre_simulation_cmd:
+            pre_simulation_cmds_rendered += cmd + "\n"
+
+        file = open("pre_simulation.sh", "w")
+        file.write(pre_simulation_cmds_rendered)
+        file.close()
+
+    def _generate_preliminary_cmds(self, time_interval):
+        """Return the usual commands that every run except the first one at 0
+        uses."""
+        prelim_cmds = ""
+        prelim_cmds += "module load cuda/%s\n" % self.cuda_version
+        prelim_cmds += "module load intel-suite\n\n"
+        prelim_cmds += "prmtop=%s\n" % self.topology_file
+        prelim_cmds += "sim=%s\n" % time_interval
+        prelim_cmds += self.scheduler.get_work_directory_cmd()
+        prelim_cmds += "cp %s/05_Prod.in .\n" % self.job_directory
+        prelim_cmds += "cp %s/${prmtop} .\n" % self.job_directory
+        return(prelim_cmds)
+
+    def _generate_final_cmds(self):
+        """Write the commands after the production run. The first copy and remove
+        commands are scheduler-specific and are implemented in the corresponding
+        engine class."""
+        final_cmds = self.scheduler.get_afterProd_cmds()
+        final_cmds += "tar -zcvf %s/results/%s_${sim}ns.tgz *\n" % (self.job_directory, self.system_name)
+        final_cmds += """rsync -avz --remove-source-files \\
+    %s/results/%s_${sim}ns.tgz \\
+    %s@%s:%s/\n""" % (self.job_directory,
+                      self.system_name,
+                      self.user,
+                      self.hostname,
+                      self.destination)
+        return(final_cmds)
 
     def _get_NumberOfJobs(self):
         total_time = self.final_time - self.start_time
