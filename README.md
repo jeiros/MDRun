@@ -31,8 +31,9 @@ At the moment only the `pbs` job scheduler is implemented.
 
 *host* Host were the job is going to run.
 
-*queue* Queue were the job is going to run. Only two options are supported: `qpgpu` for public chemistry department queue,
-and `pqigould` for the private queue.
+*queue* Queue were the job is going to run. Only two options are supported:
+*`qpgpu` for public chemistry department queue
+*`pqigould` for the private queue.
 
 *gpu_type* The type of GPU to be used. 
 
@@ -78,7 +79,9 @@ should match the one in the HPC, for instance.)
 
 ### Local Machine
 *user* Your username in your local machine
+
 *hostname* The hostname of your machine
+
 *destination* The **full** path in which the results of the simulations are going to be moved to. This directory should
 exist before the data copy is attempted, or else it will fail.
 
