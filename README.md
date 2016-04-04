@@ -81,27 +81,29 @@ from here once all the necessary files are in it.
   * :exclamation: This directory **must** contain a `results` directory in it, if it doesn't your job will fail at the end!
   * This is the directory were all the `.pbs` & the rest of the input files should be. Also, this is where you issue the `bash launcher.sh` command.
 
-* **cuda_version** The cuda version to use via `module load cuda`.
+* **cuda_version** The cuda version to use via `module load cuda`. This is expected to not changed very frequently.
 
-* **binary_location** The full path to the `pmemd.cuda_SPFP` binary (or whatever it's called).
+* **binary_location** The full path to the `pmemd.cuda_SPFP` binary (or whatever it's called). This is expected to not changed very frequently.
+
+* **pre_simulation_cmd** An indefinite list of commands that you want to run before the production run. These can be run on the
+HPC or locally. Nothing is assumed here, they'll be run as is (so if you want them to run in the HPC the binary location
+should match the one in the HPC, for instance).
 
 * **pre_simulation_type** Where to run the pre-production commands. Two options are supported:
 
-  * `cpu`: Whatever commands you want to run before the production run are read from the *pre_simulation_cmd*
+  * `cpu`: Whatever commands you want to run before the production run are read from the **pre_simulation_cmd**
         section in the JSON file and are written to a bash script called `pre_simulation.sh` which you can then
         run in your machine.
   * `gpu`: If you want to run the *pre_simulation_cmd* commands in the HPC. Then they will be used in the first
         `.pbs` file. This is not recommended as for some systems GPUs are known to give trouble with minimisations.
 
-* **pre_simulation_cmd** An indefinite list of commands that you want to run before the production run. These can be run on the
-HPC or locally. Nothing is assumed here, they'll be run as is (so if you want them to run in the HPC the binary location
-should match the one in the HPC, for instance.)
+
 
 ### Local Machine
-*user* Your username in your local machine
+* **user* Your username in your local machine
 
-*hostname* The hostname of your machine
+* **hostname** The hostname of your machine
 
-*destination* The **full** path in which the results of the simulations are going to be moved to. This directory should
+* **destination** The *full path* in which the results of the simulations are going to be moved to. This directory should
 exist before the data copy is attempted, or else it will fail.
 
