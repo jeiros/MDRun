@@ -100,9 +100,9 @@ should match the one in the HPC, for instance).
 
 
 ### Local Machine
-* **user** Your username in your local machine
+* **user** Your username in your local machine. Find it with the `whoami` command.
 
-* **hostname** The hostname of your machine
+* **hostname** The hostname of your machine. Find it with the `hostname` command.
 
 * **destination** The *full path* in which the results of the simulations are going to be moved to. This directory should
 exist before the data copy is attempted, or else it will fail.
