@@ -30,15 +30,15 @@ At the moment only the `pbs` job scheduler is implemented.
 ### PBS settings
 * **walltime** Specify the walltime to be used in format `hh:m:s`.
 
-*nnodes* Nodes to be used.
+* **nnodes** Nodes to be used.
 
-*ncpus* Number of cores to be used.
+* **ncpus** Number of cores to be used.
 
-*ngpus* Number of GPU cards to be used.
+* **ngpus** Number of GPU cards to be used.
 
-*mem* Specify the memory (in MB) for the job in the format `XXXXmb`.
+* **mem** Specify the memory (in MB) for the job in the format `XXXXmb`.
 
-*host* Host were the job is going to run.
+* **host** Host were the job is going to run.
 
 *queue* Queue were the job is going to run. Only two options are supported:
 * `qpgpu` for public chemistry department queue
