@@ -100,7 +100,7 @@ should match the one in the HPC, for instance).
 
 
 ### Local Machine
-* **user* Your username in your local machine
+* **user** Your username in your local machine
 
 * **hostname** The hostname of your machine
 

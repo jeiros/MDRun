@@ -34,8 +34,8 @@ class Simulation:
         self.job_directory = json['simulation_details']['job_directory']
         self.cuda_version = json['simulation_details']['cuda_version']
         self.binary_location = json['simulation_details']['binary_location']
-        self.pre_simulation_type = json['simulation_details']['pre_simulation_type']
         self.pre_simulation_cmd = json['simulation_details']['pre_simulation_cmd']
+        self.pre_simulation_type = json['simulation_details']['pre_simulation_type']
 
         # Local machine details
         self.user = json['local_machine']['user']
