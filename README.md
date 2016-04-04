@@ -28,7 +28,7 @@ Once you're in the appropriate HPC directory, submit the jobs with `launcher.sh`
 At the moment only the `pbs` job scheduler is implemented.
 
 ### PBS settings
-*walltime* Specify the walltime to be used in format `hh:m:s`.
+* **walltime** Specify the walltime to be used in format `hh:m:s`.
 
 *nnodes* Nodes to be used.
 
