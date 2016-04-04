@@ -1,5 +1,7 @@
 # JobSumitter
 Python tool to generate the appropriate files for long classic MD runs in the Imperial College HPC facility.
+The objective is to automate the process, so you can chain several jobs and get the results of each one directly
+to your machine. No more manual edit of your submission scripts, copying restart files back and forth, etc.
 
 **Before you start:** You need to set up your [passwordless ssh](http://www.linuxproblem.org/art_9.html) from your local machine to the HPC.
 To test if it works properly, you should be able to secure-copy a file from the HPC to your local machine
@@ -17,10 +19,12 @@ Then, use the program with:
 ```
 python generate_scripts.py input_example.json
 ```
-This will generate a series of `.pbs` files that have to be copied to the HPC along with the `launcher.sh` script, with the appropriate
+This will generate a series of `.pbs` files that have to be copied to the HPC along with the `launcher.sh` script and the appropriate
 files to run the MD job (topology, any restart/inpcrd files, as well as the input files with the MD settings.)
 
-Once you're in the appropriate HPC directory, submit the jobs with `launcher.sh`.
+Once you're in the appropriate HPC directory (the one you've specified in the **job_directory** variable),
+submit the jobs with `bash launcher.sh`. Please note that inside this directory, you should create a `results` directory as well
+for the program to work.
 
 ## JSON inputs
 
@@ -73,8 +77,9 @@ as the program does not do this for you nor checks if it is correct.
 be used in your MD input file. Also, be careful not to hit the wallclock time.
 
 * **job_directory** The directory in which the job is going to be run in the HPC. You should launch the `launcher.sh` script 
-from here once all the necessary files are in it. :exclamation: This directory **must** contain a `results` directory in it,
-if it doesn't your job will fail at the end!:exclamation:
+from here once all the necessary files are in it.
+
+:exclamation: This directory **must** contain a `results` directory in it, if it doesn't your job will fail at the end!:exclamation:
 
 * **cuda_version** The cuda version to use via `module load cuda`.
 
