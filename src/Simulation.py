@@ -26,11 +26,12 @@ class Simulation:
         self.system_name = json['simulation_details']['system_name']
         self.inpcrd_file = json['simulation_details']['inpcrd_file']
         self.topology_file = json['simulation_details']['topology_file']
+        self.start_rst = json['simulation_details']['start_rst']
+        self.input_file = json['simulation_details']['input_file']
         self.start_time = json['simulation_details']['start_time']
         self.final_time = json['simulation_details']['final_time']
         self.job_length = json['simulation_details']['job_length']
         self.job_directory = json['simulation_details']['job_directory']
-        self.start_rst = json['simulation_details']['start_rst']
         self.cuda_version = json['simulation_details']['cuda_version']
         self.binary_location = json['simulation_details']['binary_location']
         self.pre_simulation_type = json['simulation_details']['pre_simulation_type']
@@ -73,10 +74,11 @@ class Simulation:
             rendered_commands += "prevrst=%s_%sns.rst\n" % (self.system_name, self.times[sim_number - 1])
 
         rendered_commands += "cp %s/${prevrst} .\n\n" % self.job_directory
-        rendered_commands += """pbsexec -grace 15 %s -O -i 05_Prod.in \\
+        rendered_commands += """pbsexec -grace 15 %s -O -i %s \\
     -o %s_${sim}ns.out -c ${prevrst} -p ${prmtop} -r %s_${sim}ns.rst \\
-    -x 05_Prod_%s_${sim}ns.nc\n\n""" % (self.binary_location,
+    -x %s_${sim}ns.nc\n\n""" % (self.binary_location,
                                         self.system_name,
+                                        self.input_file,
                                         self.system_name,
                                         self.system_name)
         rendered_commands += self._generate_final_cmds()
@@ -96,10 +98,11 @@ class Simulation:
         simulation_cmds_rendered += "cp %s/${prmtop} .\n\n" % self.job_directory
         for cmd in self.pre_simulation_cmd:
             simulation_cmds_rendered += cmd + "\n"
-        simulation_cmds_rendered += """pbsexec -grace 15 %s -O -i 05_Prod.in \\
+        simulation_cmds_rendered += """pbsexec -grace 15 %s -O -i %s \\
     -o %s_${sim}ns.out -c %s -p ${prmtop} -r %s_${sim}ns.rst \\
-    -x 05_Prod_%s_${sim}ns.nc\n\n""" % (self.binary_location,
+    -x %s_${sim}ns.nc\n\n""" % (self.binary_location,
                                         self.system_name,
+                                        self.input_file,
                                         self.start_rst,
                                         self.system_name,
                                         self.system_name)

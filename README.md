@@ -1,19 +1,21 @@
 # JobSumitter
 Python tool to generate the appropriate files for long classic MD runs in the Imperial College HPC facility.
 
-**Before you start:**You need to set up your [passwordless ssh](http://www.linuxproblem.org/art_9.html) from your local machine to the HPC.
+**Before you start:** You need to set up your [passwordless ssh](http://www.linuxproblem.org/art_9.html) from your local machine to the HPC.
 To test if it works properly, you should be able to secure-copy a file from the HPC to your local machine
-and not be prompted for your password. 
+and not be prompted for your password. Like so: 
 ```
 je714@ch-knuth.ch.ic.ac.uk:~$ scp je714@login.cx1.hpc.ic.ac.uk:/home/je714/test_file.txt .
 test_file.txt                                                                                                                                      100%    0     0.0KB/s   00:00
 ```
 # Basic workflow
-Tune settings in the JSON file. Example file is `input_example.json`.
-Generate the PBS scripts with:
+Select your settings in the JSON file. There is an example file `input_example.json`.
 
+The code uses Python 3. Test your Python version in your machine with `python --version`.
+
+Then, use the program with:
 ```
-generate_scripts.py input_example.json
+python generate_scripts.py input_example.json
 ```
 This will generate a series of `.pbs` files that have to be copied to the HPC along with the `launcher.sh` script, with the appropriate
 files to run the MD job (topology, any restart/inpcrd files, as well as the input files with the MD settings.)
@@ -53,6 +55,14 @@ At the moment only the `pbs` job scheduler is implemented.
 
 *topology_file* The topology file of your system. Should end with `.prmtop`
 
+*start_rst* The restart file that the first job is going to use. If you start from 0 and want to run pre-production commands
+in the GPU (discouraged), this should match the name of the restart file that is written after your last pre-production run 
+(usually a heating protocol).
+
+*input_file* The input file with the MD settings for the production run. You should be specially careful that the
+timestep (`dt`) and number of MD steps to be performed (`nstlim`) match the *job_lenght* that you want,
+as the program does not do this for you nor checks if it is correct.
+
 *start_time* The time from which you want to launch the simulation (in nanoseconds).
 
 *final_time* The time at which you want your simulation to stop (in nanoseconds).
@@ -63,10 +73,6 @@ be used in your MD input file. Also, be careful not to hit the wallclock time.
 *job_directory* The directory in which the job is going to be run in the HPC. You should launch the `launcher.sh` script 
 from here once all the necessary files are in it. :exclamation: This directory **must** contain a `results` directory in it,
 if it doesn't your job will fail at the end!:exclamation:
-
-*start_rst* The restart file that the first job is going to use. If you start from 0 and want to run pre-production commands
-in the GPU (discouraged), this should match the name of the restart file that is written after your last pre-production run 
-(usually a heating protocol).
 
 *cuda_version* The cuda version to use via `module load cuda`.
 
