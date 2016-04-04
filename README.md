@@ -50,7 +50,7 @@ At the moment only the `pbs` job scheduler is implemented.
 
 *final_time* The time at which you want your simulation to stop (in nanoseconds).
 
-*job_length* The lenght of each individual MD run. You should set accordingly the amount of MD iterations and timestep to
+*job_length* The lenght of each individual MD run (in nanoseconds). You should set accordingly the amount of MD iterations and timestep to
 be used in your MD input file. Also, be careful not to hit the wallclock time.
 
 *job_directory* The directory in which the job is going to be run in the HPC. You should launch the `launcher.sh` script 
