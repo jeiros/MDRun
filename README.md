@@ -1,4 +1,4 @@
-# JobSumitter
+# JobSubmitter
 Python tool to generate the appropriate files for long classic MD runs in the Imperial College HPC facility.
 The objective is to automate the process, so you can chain several jobs and get the results of each one directly
 to your machine. No more manual edit of your submission scripts, copying restart files back and forth, etc.
