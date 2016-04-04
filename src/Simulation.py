@@ -150,7 +150,7 @@ class Simulation:
         engine class."""
         final_cmds = self.scheduler.get_afterProd_cmds()
 
-        if self.start_time = 0:
+        if self.start_time == 0:
             final_cmds += "rm %s/${inpcrd}\n" % self.job_directory
         else:
             final_cmds += "rm %s/${prevrst}\n" % self.job_directory
