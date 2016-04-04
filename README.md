@@ -40,9 +40,9 @@ At the moment only the `pbs` job scheduler is implemented.
 
 * **host** Host were the job is going to run.
 
-*queue* Queue were the job is going to run. Only two options are supported:
-* `qpgpu` for public chemistry department queue
-* `pqigould` for the private queue.
+* **queue** Queue were the job is going to run. Only two options are supported:
+  * *qpgpu* for public chemistry department queue
+  * *pqigould* for the private queue.
 
 *gpu_type* The type of GPU to be used. 
 
