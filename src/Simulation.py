@@ -77,8 +77,8 @@ class Simulation:
         rendered_commands += """pbsexec -grace 15 %s -O -i %s \\
     -o %s_${sim}ns.out -c ${prevrst} -p ${prmtop} -r %s_${sim}ns.rst \\
     -x %s_${sim}ns.nc\n\n""" % (self.binary_location,
-                                        self.system_name,
                                         self.input_file,
+                                        self.system_name,
                                         self.system_name,
                                         self.system_name)
         rendered_commands += self._generate_final_cmds()
@@ -101,8 +101,8 @@ class Simulation:
         simulation_cmds_rendered += """pbsexec -grace 15 %s -O -i %s \\
     -o %s_${sim}ns.out -c %s -p ${prmtop} -r %s_${sim}ns.rst \\
     -x %s_${sim}ns.nc\n\n""" % (self.binary_location,
-                                        self.system_name,
                                         self.input_file,
+                                        self.system_name,
                                         self.start_rst,
                                         self.system_name,
                                         self.system_name)
@@ -140,7 +140,7 @@ class Simulation:
         prelim_cmds += "prmtop=%s\n" % self.topology_file
         prelim_cmds += "sim=%s\n" % time_interval
         prelim_cmds += self.scheduler.get_work_directory_cmd()
-        prelim_cmds += "cp %s/05_Prod.in .\n" % self.job_directory
+        prelim_cmds += "cp %s/%s .\n" % (self.job_directory, self.input_file)
         prelim_cmds += "cp %s/${prmtop} .\n" % self.job_directory
         return(prelim_cmds)
 
