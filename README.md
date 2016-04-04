@@ -47,7 +47,7 @@ These settings are used to build the [PBS directives](https://www.osc.edu/superc
 
 * **gpu_type** The type of GPU to be used. 
 
-* **email** You're email, so you can get notified when a job aborts, begins or ends successfully.
+* **email** Your email, so you can get notified when a job aborts, begins or ends successfully.
 
 ### Simulation details
 * **system_name** The name of your system. This is used throughout the code to give the files matching names.
@@ -64,7 +64,8 @@ in the GPU (discouraged), this should match the name of the restart file that is
 timestep (`dt`) and number of MD steps to be performed (`nstlim`) match the **job_lenght** that you want,
 as the program does not do this for you nor checks if it is correct.
 
-* **start_time** The time from which you want to launch the simulation (in nanoseconds).
+* **start_time** The time from which you want to launch the simulation (in nanoseconds). Doesn't necessarily have to be
+0 (you can start from an existing simulation, using the appropriate `.rst` file, as specified in the **start_rst** variable.)
 
 * **final_time** The time at which you want your simulation to stop (in nanoseconds).
 
