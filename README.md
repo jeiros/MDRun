@@ -62,7 +62,7 @@ These settings are used to build the [PBS directives](https://www.osc.edu/superc
 
 * **start_rst** The restart file that the first job is going to use. If you start from 0 and want to run pre-production commands
 in the GPU (discouraged), this should match the name of the restart file that is written after your last pre-production run 
-(usually a heating protocol).
+(usually a heating protocol). If you don't start from 0, this file will be read to start the first job.
 
 * **input_file** The input file with the MD settings for the production run. You should be specially careful that the
 timestep (`dt`) and number of MD steps to be performed (`nstlim`) match the **job_lenght** that you want,
