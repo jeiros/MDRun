@@ -78,8 +78,8 @@ be used in your MD input file. Also, be careful not to hit the wallclock time.
 
 * **job_directory** The directory in which the job is going to be run in the HPC. You should launch the `launcher.sh` script 
 from here once all the necessary files are in it.
-
-:exclamation: This directory **must** contain a `results` directory in it, if it doesn't your job will fail at the end!:exclamation:
+  * :exclamation: This directory **must** contain a `results` directory in it, if it doesn't your job will fail at the end!
+  * This is the directory were all the `.pbs` & the rest of the input files should be. Also, this is where you issue the `bash launcher.sh` command.
 
 * **cuda_version** The cuda version to use via `module load cuda`.
 
