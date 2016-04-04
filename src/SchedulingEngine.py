@@ -31,7 +31,10 @@ class PBSEngine(SchedulingEngine):
     def get_afterProd_cmds(self):
         self.afterProd_cmd = ""
         self.afterProd_cmd += "cp /tmp/pbs.${PBS_JOBID}/%s_${sim}ns.rst %s/\n" % (self.simulation.system_name, self.simulation.job_directory)
-        self.afterProd_cmd += "rm /tmp/pbs.${PBS_JOBID}/${inpcrd}\n"
+        if self.simulation.start_time = 0:
+            self.afterProd_cmd += "rm /tmp/pbs.${PBS_JOBID}/${inpcrd}\n"
+        else:
+            self.afterProd_cmd += "rm /tmp/pbs.${PBS_JOBID}/${prevrst}\n"
         return(self.afterProd_cmd)
 
 class OpenLavaEngine(SchedulingEngine):

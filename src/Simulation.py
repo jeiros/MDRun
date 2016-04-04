@@ -76,7 +76,7 @@ class Simulation:
         rendered_commands += "cp %s/${prevrst} .\n\n" % self.job_directory
         rendered_commands += """pbsexec -grace 15 %s -O -i %s \\
     -o %s_${sim}ns.out -c ${prevrst} -p ${prmtop} -r %s_${sim}ns.rst \\
-    -x %s_${sim}ns.nc\n\n""" % (self.binary_location,
+    -x 05_Prod_%s_${sim}ns.nc\n\n""" % (self.binary_location,
                                         self.input_file,
                                         self.system_name,
                                         self.system_name,
@@ -100,7 +100,7 @@ class Simulation:
             simulation_cmds_rendered += cmd + "\n"
         simulation_cmds_rendered += """pbsexec -grace 15 %s -O -i %s \\
     -o %s_${sim}ns.out -c %s -p ${prmtop} -r %s_${sim}ns.rst \\
-    -x %s_${sim}ns.nc\n\n""" % (self.binary_location,
+    -x 05_Prod_%s_${sim}ns.nc\n\n""" % (self.binary_location,
                                         self.input_file,
                                         self.system_name,
                                         self.start_rst,
@@ -149,6 +149,12 @@ class Simulation:
         commands are scheduler-specific and are implemented in the corresponding
         engine class."""
         final_cmds = self.scheduler.get_afterProd_cmds()
+
+        if self.start_time = 0:
+            final_cmds += "rm %s/${inpcrd}\n" % self.job_directory
+        else:
+            final_cmds += "rm %s/${prevrst}\n" % self.job_directory
+
         final_cmds += "tar -zcvf %s/results/%s_${sim}ns.tgz *\n" % (self.job_directory, self.system_name)
         final_cmds += """rsync -avz --remove-source-files \\
     %s/results/%s_${sim}ns.tgz \\
