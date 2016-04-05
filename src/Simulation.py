@@ -149,12 +149,6 @@ class Simulation:
         commands are scheduler-specific and are implemented in the corresponding
         engine class."""
         final_cmds = self.scheduler.get_afterProd_cmds()
-
-        if self.start_time == 0:
-            final_cmds += "rm %s/${inpcrd}\n" % self.job_directory
-        else:
-            final_cmds += "rm %s/${prevrst}\n" % self.job_directory
-
         final_cmds += "tar -zcvf %s/results/%s_${sim}ns.tgz *\n" % (self.job_directory, self.system_name)
         final_cmds += """rsync -avz --remove-source-files \\
     %s/results/%s_${sim}ns.tgz \\
