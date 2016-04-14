@@ -23,8 +23,7 @@ This will generate a series of `.pbs` files that have to be copied to the HPC al
 files to run the MD job (topology, any restart/inpcrd files, as well as the input files with the MD settings.)
 
 Once you're in the appropriate HPC directory (the one you've specified in the **job_directory** variable),
-submit the jobs with `bash launcher.sh`. Please note that inside this directory, you should create a `results` directory as well
-for the program to work.
+submit the jobs with `bash launcher.sh`.
 
 ## JSON inputs
 
@@ -78,7 +77,6 @@ be used in your MD input file. Also, be careful not to hit the wallclock time.
 
 * **job_directory** The directory in which the job is going to be run in the HPC. You should launch the `launcher.sh` script 
 from here once all the necessary files are in it.
-  * :exclamation: This directory **must** contain a `results` directory in it, if it doesn't your job will fail at the end!
   * This is the directory were all the `.pbs` & the rest of the input files should be. Also, this is where you issue the `bash launcher.sh` command.
 
 * **cuda_version** The cuda version to use via `module load cuda`. This is expected to not changed very frequently.
