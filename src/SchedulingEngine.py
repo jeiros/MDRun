@@ -11,15 +11,18 @@ class PBSEngine(SchedulingEngine):
         self.pbs_headers += "ngpus=%s:" % self.simulation.ngpus
         self.pbs_headers += "mem=%s:" % self.simulation.memory
 
-        if self.simulation.queue_type == 'gpgpu':
+        if self.simulation.queue == 'gpgpu':
             self.pbs_headers += "gpu_type=%s\n" % self.simulation.gpu_type
-        elif self.simulation.queue_type == 'pqigould':
+        elif self.simulation.queue == 'pqigould':
             self.pbs_headers += "host=%s\n" % self.simulation.host
         else:
-            sys.exit("Supported queues are 'pgigould' or 'gpgpu' only.")
+            print("""Queue wasn't gpgpu or pqigould. Assume nothing and print
+                  in the PBS header both the gpu_type and the host.\n""")
+            self.pbs_headers += "gpu_type=%s\n" % self.simulation.gpu_type
+            self.pbs_headers += "host=%s\n" % self.simulation.host
 
         self.pbs_headers += "#PBS -lwalltime=%s\n" % self.simulation.walltime
-        self.pbs_headers += "#PBS -q %s\n" % self.simulation.queue_type
+        self.pbs_headers += "#PBS -q %s\n" % self.simulation.queue
         self.pbs_headers += "#PBS -M %s\n" % self.simulation.email
         self.pbs_headers += "#PBS -m abe\n\n"
 
@@ -36,6 +39,7 @@ class PBSEngine(SchedulingEngine):
         else:
             self.afterProd_cmd += "rm /tmp/pbs.${PBS_JOBID}/${prevrst}\n"
         return(self.afterProd_cmd)
+
 
 class OpenLavaEngine(SchedulingEngine):
     def generate_headers(self):

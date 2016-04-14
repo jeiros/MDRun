@@ -1,5 +1,6 @@
 from src.SchedulingEngine import PBSEngine
 from src.SchedulingEngine import OpenLavaEngine
+import sys
 
 
 class Simulation:
@@ -12,7 +13,7 @@ class Simulation:
             self.scheduler = OpenLavaEngine(self)
 
         # PBS settings
-        self.queue_type = json['pbs_settings']['queue']
+        self.queue = json['pbs_settings']['queue']
         self.walltime = json['pbs_settings']['walltime']
         self.email = json['pbs_settings']['email']
         self.nnodes = json['pbs_settings']['nnodes']
@@ -71,7 +72,8 @@ class Simulation:
         if (sim_number == 1): 
             rendered_commands += "prevrst=%s\n" % self.start_rst
         else:
-            rendered_commands += "prevrst=%s_%sns.rst\n" % (self.system_name, self.times[sim_number - 1])
+            rendered_commands += "prevrst=%s_%sns.rst\n" % (self.system_name,
+                                                            self.times[sim_number - 1])
 
         rendered_commands += "cp %s/${prevrst} .\n\n" % self.job_directory
         rendered_commands += """pbsexec -grace 15 %s -O -i %s \\
@@ -96,8 +98,10 @@ class Simulation:
         simulation_cmds_rendered += "cp %s/*.in .\n" % self.job_directory
         simulation_cmds_rendered += "cp %s/${inpcrd} .\n" % self.job_directory
         simulation_cmds_rendered += "cp %s/${prmtop} .\n\n" % self.job_directory
+
         for cmd in self.pre_simulation_cmd:
             simulation_cmds_rendered += cmd + "\n"
+
         simulation_cmds_rendered += """pbsexec -grace 15 %s -O -i %s \\
     -o %s_${sim}ns.out -c %s -p ${prmtop} -r %s_${sim}ns.rst \\
     -x 05_Prod_%s_${sim}ns.nc\n\n""" % (self.binary_location,
@@ -112,7 +116,6 @@ class Simulation:
                                       str(1).zfill(2)), "w")
         file.write(simulation_cmds_rendered)
         file.close()
-
 
     def _write_pre_simulation_file(self):
         """Write a bash script to do the pre simulation commands as specified
@@ -149,9 +152,10 @@ class Simulation:
         commands are scheduler-specific and are implemented in the corresponding
         engine class."""
         final_cmds = self.scheduler.get_afterProd_cmds()
-        final_cmds += "tar -zcvf %s/results/%s_${sim}ns.tgz *\n" % (self.job_directory, self.system_name)
+        final_cmds += "tar -zcvf %s/%s_${sim}ns.tgz *\n" % (self.job_directory,
+                                                            self.system_name)
         final_cmds += """rsync -avz --remove-source-files \\
-    %s/results/%s_${sim}ns.tgz \\
+    %s/%s_${sim}ns.tgz \\
     %s@%s:%s/\n""" % (self.job_directory,
                       self.system_name,
                       self.user,
