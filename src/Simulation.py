@@ -12,6 +12,9 @@ class Simulation:
         elif json['scheduler'] == 'openlava':
             self.scheduler = OpenLavaEngine(self)
 
+        # Is it an HPC job or local machine job
+        self.is_HPCjob = (json['HPC_job'] == "True")  # Boolean variable
+        print(self.is_HPCjob)
         # PBS settings
         self.queue = json['pbs_settings']['queue']
         self.walltime = json['pbs_settings']['walltime']
@@ -38,10 +41,15 @@ class Simulation:
         self.pre_simulation_cmd = json['simulation_details']['pre_simulation_cmd']
         self.pre_simulation_type = json['simulation_details']['pre_simulation_type']
 
-        # Local machine details
+        # Workstation details
         self.user = json['local_machine']['user']
         self.hostname = json['local_machine']['hostname']
         self.destination = json['local_machine']['destination']
+
+        # Master node details for local TORQUE queue
+        self.user_m = json['master_node']['user_m']
+        self.hostname_m = json['master_node']['hostname_m']
+        self.job_directory_m = json['master_node']['job_directory_m']
 
     def writeSimulationFiles(self):
         needs_pre_simulation_file = (self.pre_simulation_type == "cpu")
@@ -56,11 +64,12 @@ class Simulation:
         self.times = self._get_Times()
 
         for sim_number, time_interval in self.times.items():
+            self.sim_number = sim_number
             if ((sim_number == 1) and (self.start_time == 0) and
                (not needs_pre_simulation_file)):
-                print("The presimulation commands are going to be run on the HPC.\n")
+                print("The presimulation commands are going to be run on a GPU.\n")
                 # Only if the user wants to run the pre-simulation commands
-                # in a qsub script (in the HPC).
+                # in a qsub script.
                 self._write_first_step_file(time_interval)
             else:
                 self._write_step_file(sim_number, time_interval)
@@ -79,7 +88,9 @@ class Simulation:
         rendered_commands += "cp %s/%s .\n" % (self.job_directory, self.input_file)
         rendered_commands += "cp %s/${prmtop} .\n" % self.job_directory
         rendered_commands += "cp %s/${prevrst} .\n\n" % self.job_directory
-        rendered_commands += """pbsexec -grace 15 %s -O -i %s \\
+        if self.is_HPCjob:
+            rendered_commands += "pbsexec -grace 15 "
+        rendered_commands += """%s -O -i %s \\
     -o %s_${sim}ns.out -c ${prevrst} -p ${prmtop} -r %s_${sim}ns.rst \\
     -x 05_Prod_%s_${sim}ns.nc\n\n""" % (self.binary_location,
                                         self.input_file,
@@ -105,7 +116,9 @@ class Simulation:
         for cmd in self.pre_simulation_cmd:
             simulation_cmds_rendered += cmd + "\n"
 
-        simulation_cmds_rendered += """pbsexec -grace 15 %s -O -i %s \\
+        if self.is_HPCjob:
+            simulation_cmds_rendered += "pbsexec -grace 15 "
+        simulation_cmds_rendered += """%s -O -i %s \\
     -o %s_${sim}ns.out -c %s -p ${prmtop} -r %s_${sim}ns.rst \\
     -x 05_Prod_%s_${sim}ns.nc\n\n""" % (self.binary_location,
                                         self.input_file,
@@ -140,8 +153,9 @@ class Simulation:
     def _generate_preliminary_cmds(self, time_interval):
         """Return the usual commands that every run uses."""
         prelim_cmds = ""
-        prelim_cmds += "module load cuda/%s\n" % self.cuda_version
-        prelim_cmds += "module load intel-suite\n\n"
+        if self.is_HPCjob:
+            prelim_cmds += "module load cuda/%s\n" % self.cuda_version
+            prelim_cmds += "module load intel-suite\n\n"
         prelim_cmds += "prmtop=%s\n" % self.topology_file
         prelim_cmds += "sim=%s\n\n" % time_interval
         return(prelim_cmds)
@@ -160,6 +174,8 @@ class Simulation:
                       self.user,
                       self.hostname,
                       self.destination)
+        if not self.is_HPCjob:
+            final_cmds += "rm -rf /tmp/pbs.${PBS_JOBID}/\n"
         return(final_cmds)
 
     def _get_NumberOfJobs(self):
