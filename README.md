@@ -30,6 +30,10 @@ submit the jobs with `bash launcher.sh`.
 ### Scheduler
 At the moment only the `pbs` job scheduler is implemented.
 
+### HPC_job
+Set this to 'true' if the job is going to be run in the HPC at Imperial. Set to 'false' of leave empty
+if you want to run on a local machine that has torque installed.
+
 ### PBS settings
 These settings are used to build the [PBS directives](https://www.osc.edu/supercomputing/batch-processing-at-osc/pbs-directives-summary) as headers.
 * **walltime** Specify the walltime to be used in format `hh:m:s`.
@@ -44,9 +48,11 @@ These settings are used to build the [PBS directives](https://www.osc.edu/superc
 
 * **host** Host were the job is going to run.
 
-* **queue** Queue were the job is going to run. Only two options are supported:
+* **queue** Queue were the job is going to run. Only two options are supported for the HPC:
   * `qpgpu` for public chemistry department queue
   * `pqigould` for the private queue.
+
+To run on the local machines, there is the 'long' queue with a walltime of 192 hours enabled.
 
 * **gpu_type** The type of GPU to be used. 
 
@@ -104,4 +110,10 @@ should match the one in the HPC, for instance).
 
 * **destination** The *full path* in which the results of the simulations are going to be moved to. This directory should
 exist before the data copy is attempted, or else it will fail.
+
+### Master Node
+This is just used if the jobs are run on the local machines.
+* **user_m** Your username on the master node.
+* **hostname_m* The hostname of the master node. Shouldn't change.
+* **job_directory_m* The job where you'll launch the '.pbs' scripts from.
 
