@@ -13,8 +13,7 @@ class Simulation:
             self.scheduler = OpenLavaEngine(self)
 
         # Is it an HPC job or local machine job
-        self.is_HPCjob = (json['HPC_job'] == "True")  # Boolean variable
-        print(self.is_HPCjob)
+        self.is_HPCjob = (json['HPC_job'] == "True")
         # PBS settings
         self.queue = json['pbs_settings']['queue']
         self.walltime = json['pbs_settings']['walltime']
