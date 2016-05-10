@@ -114,6 +114,6 @@ exist before the data copy is attempted, or else it will fail.
 ### Master Node
 This is just used if the jobs are run on the local machines.
 * **user_m** Your username on the master node.
-* **hostname_m* The hostname of the master node. Shouldn't change.
-* **job_directory_m* The job where you'll launch the '.pbs' scripts from.
+* **hostname_m** The hostname of the master node. Shouldn't change.
+* **job_directory_m** The job where you'll launch the '.pbs' scripts from.
 
