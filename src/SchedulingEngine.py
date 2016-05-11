@@ -49,7 +49,7 @@ class PBSEngine(SchedulingEngine):
             work_dir_cmd += "scp %s@%s:%s/* .\n" % (self.simulation.user_m,
                                                     self.simulation.hostname_m,
                                                     self.simulation.job_directory_m)
-            work_dir_cmd += "mkdir -p /tmp/pbs.${PBS_JOBID}\n"
+            work_dir_cmd += "mkdir -p /tmp/pbs.${PBS_JOBID} && "
             work_dir_cmd += "cd /tmp/pbs.${PBS_JOBID}\n"
             return(work_dir_cmd)
 
