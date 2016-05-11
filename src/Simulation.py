@@ -109,6 +109,7 @@ class Simulation:
         simulation_cmds_rendered += "inpcrd=%s\n" % self.inpcrd_file
         simulation_cmds_rendered += self.scheduler.get_work_directory_cmd()
         simulation_cmds_rendered += "cp %s/*.in .\n" % self.job_directory
+        simulation_cmds_rendered += "cp %s/*.rst .\n" % self.job_directory
         simulation_cmds_rendered += "cp %s/${prmtop} .\n" % self.job_directory
         simulation_cmds_rendered += "cp %s/${inpcrd} .\n\n" % self.job_directory
 
