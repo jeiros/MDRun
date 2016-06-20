@@ -4,6 +4,7 @@ import sys
 
 
 class Simulation:
+
     def __init__(self, json):
         """Parse the information inside the JSON file into
         class atributes."""
@@ -37,8 +38,10 @@ class Simulation:
         self.job_directory = json['simulation_details']['job_directory']
         self.cuda_version = json['simulation_details']['cuda_version']
         self.binary_location = json['simulation_details']['binary_location']
-        self.pre_simulation_cmd = json['simulation_details']['pre_simulation_cmd']
-        self.pre_simulation_type = json['simulation_details']['pre_simulation_type']
+        self.pre_simulation_cmd = json[
+            'simulation_details']['pre_simulation_cmd']
+        self.pre_simulation_type = json[
+            'simulation_details']['pre_simulation_type']
 
         # Workstation details
         self.user = json['local_machine']['user']
@@ -65,8 +68,9 @@ class Simulation:
         for sim_number, time_interval in self.times.items():
             self.sim_number = sim_number
             if ((sim_number == 1) and (self.start_time == 0) and
-               (not needs_pre_simulation_file)):
-                print("The presimulation commands are going to be run on a GPU.\n")
+                    (not needs_pre_simulation_file)):
+                print(
+                    "The presimulation commands are going to be run on a GPU.\n")
                 # Only if the user wants to run the pre-simulation commands
                 # in a qsub script.
                 self._write_first_step_file(time_interval)
@@ -84,7 +88,8 @@ class Simulation:
                                                             self.times[sim_number - 1])
 
         rendered_commands += self.scheduler.get_work_directory_cmd()
-        rendered_commands += "cp %s/%s .\n" % (self.job_directory, self.input_file)
+        rendered_commands += "cp %s/%s .\n" % (
+            self.job_directory, self.input_file)
         rendered_commands += "cp %s/${prmtop} .\n" % self.job_directory
         rendered_commands += "cp %s/${prevrst} .\n\n" % self.job_directory
         if self.is_HPCjob:
@@ -105,7 +110,8 @@ class Simulation:
 
     def _write_first_step_file(self, time_interval):
         simulation_cmds_rendered = self.sch_headers
-        simulation_cmds_rendered += self._generate_preliminary_cmds(time_interval)
+        simulation_cmds_rendered += self._generate_preliminary_cmds(
+            time_interval)
         simulation_cmds_rendered += "inpcrd=%s\n" % self.inpcrd_file
         simulation_cmds_rendered += self.scheduler.get_work_directory_cmd()
         simulation_cmds_rendered += "cp %s/*.in .\n" % self.job_directory
