@@ -56,7 +56,7 @@ To run on the local machines, there is the 'long' queue with a walltime of 192 h
 
 * **gpu_type** The type of GPU to be used. 
 
-* **email** Your email, so you can get notified when a job aborts, begins or ends successfully.
+
 
 ### Simulation details
 * **system_name** The name of your system. This is used throughout the code to give the files matching names.
