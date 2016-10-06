@@ -18,7 +18,6 @@ class Simulation:
         # PBS settings
         self.queue = json['pbs_settings']['queue']
         self.walltime = json['pbs_settings']['walltime']
-        self.email = json['pbs_settings']['email']
         self.nnodes = json['pbs_settings']['nnodes']
         self.ncpus = json['pbs_settings']['ncpus']
         self.ngpus = json['pbs_settings']['ngpus']

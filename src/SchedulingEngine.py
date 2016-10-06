@@ -24,7 +24,6 @@ class PBSEngine(SchedulingEngine):
 
             self.pbs_headers += "#PBS -lwalltime=%s\n" % self.simulation.walltime
             self.pbs_headers += "#PBS -q %s\n" % self.simulation.queue
-            self.pbs_headers += "#PBS -M %s\n" % self.simulation.email
             self.pbs_headers += "#PBS -m abe\n\n"
         else:
             self.pbs_headers = "#PBS -l nodes=%s" % self.simulation.host

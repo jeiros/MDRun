@@ -9,8 +9,7 @@
         "mem":"1000mb",
         "host":"cx1-51-6-1",
         "queue":"gpgpu",
-        "gpu_type":"K80",
-        "email":"je714@ic.ac.uk"
+        "gpu_type":"K80"
     },
     "simulation_details": {
         "system_name": "noCALWT-run10",
