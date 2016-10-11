@@ -1,5 +1,5 @@
-from src.SchedulingEngine import PBSEngine
-from src.SchedulingEngine import OpenLavaEngine
+from .SchedulingEngine import PBSEngine
+from .SchedulingEngine import OpenLavaEngine
 import sys
 
 
