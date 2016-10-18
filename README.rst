@@ -29,7 +29,7 @@ You need to set up your `passwordless ssh <http://www.linuxproblem.org/art_9.htm
 To test if it works properly, you should be able to secure-copy a file from the HPC to your local machine
 and not be prompted for your password. Like so::
 
-    $ scp je714@login.cx1.hpc.ic.ac.uk:/home/je714/test_file.txt .
+    $ scp username@HPC-hostname:/home/username/test_file.txt .
     test_file.txt              100%    0     0.0KB/s   00:00
 
 
