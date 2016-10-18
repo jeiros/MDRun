@@ -25,7 +25,7 @@ to your machine. No more manual edit of your submission scripts, copying restart
 Before you start
 ----------------
 
-You need to set up your `passwordless ssh<http://www.linuxproblem.org/art_9.html>`_ from your local machine to the HPC.
+You need to set up your `passwordless ssh <http://www.linuxproblem.org/art_9.html>`_ from your local machine to the HPC.
 To test if it works properly, you should be able to secure-copy a file from the HPC to your local machine
 and not be prompted for your password. Like so:
 
