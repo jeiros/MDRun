@@ -1,29 +1,38 @@
-# Basic workflow
-Select your settings in the JSON file. There is an example file `input_example.json`.
+How to use
+==========
 
-The code uses Python 3. Test your Python version in your machine with `python --version`.
 
-Then, use the program with:
-```
-python generate_scripts.py input_example.json
-```
-This will generate a series of `.pbs` files that have to be copied to the HPC along with the `launcher.sh` script and the appropriate
+Basic workflow
+--------------
+
+Select your settings in the JSON file. There is an example file ``input_example.json``.
+
+The code uses Python 3. Test your Python version in your machine with ``python --version``.
+
+Then, use the program with::
+
+    python generate_scripts.py input_example.json
+
+This will generate a series of ``.pbs`` files that have to be copied to the HPC along with the ``launcher.sh`` script and the appropriate
 files to run the MD job (topology, any restart/inpcrd files, as well as the input files with the MD settings.)
 
 Once you're in the appropriate HPC directory (the one you've specified in the **job_directory** variable),
-submit the jobs with `bash launcher.sh`.
+submit the jobs with ``launch_PBS_jobs``.
 
-## JSON inputs
+JSON inputs
+-----------
 
-### Scheduler
-At the moment only the `pbs` job scheduler is implemented.
+Scheduler
+---------
+At the moment only the PBS job scheduler is implemented.
 
-### HPC_job
-Set this to 'true' if the job is going to be run in the HPC at Imperial. Set to 'false' of leave empty
+HPC_job
+-------
+Set this to ``true`` if the job is going to be run in the HPC at Imperial. Set to ``false`` of leave empty
 if you want to run on a local machine that has torque installed.
 
 ### PBS settings
-These settings are used to build the [PBS directives](https://www.osc.edu/supercomputing/batch-processing-at-osc/pbs-directives-summary) as headers.
+These settings are used to build the `PBS directives <https://www.osc.edu/supercomputing/batch-processing-at-osc/pbs-directives-summary>`_ as headers.
 * **walltime** Specify the walltime to be used in format `hh:m:s`.
 
 * **nnodes** Nodes to be used.
@@ -46,7 +55,9 @@ To run on the local machines, there is the 'long' queue with a walltime of 192 h
 
 
 
-### Simulation details
+Simulation details
+------------------
+
 * **system_name** The name of your system. This is used throughout the code to give the files matching names.
 
 * **inpcrd_file** The input coordinates file. This is used if you want to start your simulation from 0. Should end with `.inpcrd`.
