@@ -14,8 +14,7 @@ import unittest
 from contextlib import contextmanager
 from click.testing import CliRunner
 
-from JobSubmitter import JobSubmitter
-from JobSubmitter import cli
+import JobSubmitter
 
 
 # class TestJobsubmitter(unittest.TestCase):
@@ -47,5 +46,5 @@ class TestHelloWorld(unittest.TestCase):
         self.hello_message = "Hello, world"
 
     def test_print_hello_world(self):
-        output = JobSubmitter.hello()
+        output = JobSubmitter.cli.hello()
         assert(output == self.hello_message)

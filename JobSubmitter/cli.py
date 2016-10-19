@@ -12,11 +12,6 @@ def main(args=None):
     click.echo("See click documentation at http://click.pocoo.org/")
 
 
-def hello():
-    """ Returns a Hello, World"""
-    return("Hello, world")
-
-
 if __name__ == "__main__":
     main()
 
