@@ -183,13 +183,21 @@ class Simulation(object):
         return(final_cmds)
 
     def _get_NumberOfJobs(self):
+        """Counts how many jobs are going to be needed."""
+        if self.start_time < 0:
+            raise ValueError("Start time must be 0 or positive.")
         total_time = self.final_time - self.start_time
+        if total_time < 0:
+            raise ValueError("Total time is negative. Check your inputs!")
         if (total_time % self.job_length) != 0:
-            sys.exit("Job length must be a divisor of total simulation time.")
+            raise ValueError(
+                "Job length must be a divisor of total simulation time.")
         else:
             return(int(total_time / self.job_length) + 1)
 
     def _get_Times(self):
+        """Returns a dictionary with the number of each simulation (starting at 1)
+        and its corresponding time frame."""
         timeList = {}
         for job in range(1, self._get_NumberOfJobs()):
             if job == 1:
