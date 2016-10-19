@@ -11,6 +11,7 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     'Click>=6.0',
+    'json>=2.0.9',
     # TODO: put package requirements here
 ]
 

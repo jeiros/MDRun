@@ -3,7 +3,9 @@ from .SchedulingEngine import OpenLavaEngine
 import sys
 
 
-class Simulation:
+class Simulation(object):
+
+    """docstring for Simulation"""
 
     def __init__(self, json):
         """Parse the information inside the JSON file into

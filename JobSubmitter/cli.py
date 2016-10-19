@@ -2,6 +2,7 @@
 
 from __future__ import print_function
 import click
+import json
 
 
 @click.command()
@@ -10,6 +11,15 @@ def main(args=None):
     click.echo("Replace this message by putting your code into "
                "JobSubmitter.cli.main")
     click.echo("See click documentation at http://click.pocoo.org/")
+
+
+def read_jsonfile(file):
+    """
+    Parse the input JSON file and return a dictionary with the info
+    """
+    with open(file) as data:
+        json_data = json.load(data)
+    return(json_data)
 
 
 if __name__ == "__main__":
@@ -28,15 +38,6 @@ if __name__ == "__main__":
 # parser.add_argument("InputFile", help="A JSON file with the different options")
 
 # args = parser.parse_args()
-
-
-# def read_jsonfile(file):
-#     """
-#     Parse the input JSON file and return a dictionary with the info
-#     """
-#     with open(file) as data:
-#         json_data = json.load(data)
-#     return(json_data)
 
 
 # def main():
