@@ -14,6 +14,7 @@ Contents:
    readme
    installation
    usage
+   example_input
    contributing
    authorshistory
 
