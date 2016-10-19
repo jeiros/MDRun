@@ -16,6 +16,7 @@ requirements = [
 
 test_requirements = [
     # TODO: put package test requirements here
+    'tox>=2.4.1',
 ]
 
 setup(

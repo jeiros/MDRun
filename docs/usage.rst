@@ -101,11 +101,10 @@ should match the one in the HPC, for instance).
 
 * ``pre_simulation_type`` Where to run the pre-production commands. Two options are supported:
 
-  * ``cpu``: Whatever commands you want to run before the production run are read from the ``pre_simulation_cmd``
-        section in the JSON file and are written to a bash script called ``pre_simulation.sh`` which you can then
-        run in your machine.
+  * ``cpu``: Whatever commands you want to run before the production run are read from the ``pre_simulation_cmd`` section in
+the JSON file and are written to a bash script called ``pre_simulation.sh`` which you can then run in your machine.
   * ``gpu``: If you want to run the *pre_simulation_cmd* commands in the HPC. Then they will be used in the first
-        ``.pbs`` file. This is not recommended as for some systems GPUs are known to give trouble with minimisations.
+``.pbs`` file. This is not recommended as for some systems GPUs are known to give trouble with minimisations.
 
 
 
