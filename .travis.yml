@@ -30,3 +30,6 @@ deploy:
     tags: true
     repo: jeiros/JobSubmitter
     condition: $TOXENV == py27
+
+notifications:
+  email: false
