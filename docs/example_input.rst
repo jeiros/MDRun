@@ -2,7 +2,10 @@
 Example JSON input file
 =======================
 
-.. code-block:: json
+Here's an input file to get you started:
+
+.. code:: json
+
     {
         "scheduler": "pbs",
         "HPC_job": "True",
