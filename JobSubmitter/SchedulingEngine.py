@@ -59,14 +59,3 @@ class PBSEngine(SchedulingEngine):
         else:
             self.afterProd_cmd += "rm /tmp/pbs.${PBS_JOBID}/${prevrst}\n"
         return(self.afterProd_cmd)
-
-
-class OpenLavaEngine(SchedulingEngine):
-    def generate_headers(self):
-        pass
-
-    def get_work_directory_cmd(self):
-        pass
-
-    def get_afterProd_cmds(self):
-        pass

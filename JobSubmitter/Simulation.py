@@ -1,5 +1,4 @@
 from .SchedulingEngine import PBSEngine
-from .SchedulingEngine import OpenLavaEngine
 import sys
 
 
@@ -12,8 +11,6 @@ class Simulation(object):
         class atributes."""
         if json['scheduler'] == 'pbs':
             self.scheduler = PBSEngine(self)
-        elif json['scheduler'] == 'openlava':
-            self.scheduler = OpenLavaEngine(self)
 
         # Is it an HPC job or local machine job
         self.is_HPCjob = (json['HPC_job'] == "True")
