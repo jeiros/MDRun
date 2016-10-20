@@ -18,7 +18,7 @@ Job Submitter
      :alt: Updates
 
 .. image:: https://coveralls.io/repos/github/jeiros/JobSubmitter/badge.svg?branch=master
-:target: https://coveralls.io/github/jeiros/JobSubmitter?branch=master
+        :target: https://coveralls.io/github/jeiros/JobSubmitter?branch=master
 
 
 I've started developing this Python program to generate the appropriate files for long classic
