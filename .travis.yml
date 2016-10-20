@@ -27,3 +27,6 @@ script: nosetests
 
 notifications:
   email: false
+
+after_success:
+  - coveralls
