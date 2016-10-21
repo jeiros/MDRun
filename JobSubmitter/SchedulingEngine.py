@@ -30,7 +30,8 @@ class PBSEngine(SchedulingEngine):
                                                        self.simulation.ncpus)
             self.pbs_headers += "#PBS -l mem=%s\n" % self.simulation.memory
             self.pbs_headers += "#PBS -l walltime=%s\n" % self.simulation.walltime
-            self.pbs_headers += "#PBS -q %s\n\n" % self.simulation.queue
+            self.pbs_headers += "#PBS -q %s\n" % self.simulation.queue
+            self.pbs_headers += "#PBS -j oe\n\n"
 
         return(self.pbs_headers)
 
