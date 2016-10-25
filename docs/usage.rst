@@ -11,7 +11,7 @@ The code uses Python 3. Test your Python version in your machine with ``python -
 
 Then, use the program with::
 
-    python generate_scripts.py input_example.json
+    JobSubmitter generate_scripts input_example.json
 
 This will generate a series of ``.pbs`` files that have to be copied to the HPC along with the ``launch_PBS_jobs`` script and the appropriate
 files to run the MD job (topology, any restart/inpcrd files, as well as the input files with the MD settings.)
