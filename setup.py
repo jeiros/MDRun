@@ -20,7 +20,7 @@ test_requirements = [
 
 
 NAME = "MDRun"
-VERSION = '0.1.2.1'
+VERSION = '0.1.3'
 
 
 setup(
