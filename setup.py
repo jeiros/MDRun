@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from setuptools import setup
+from setuptools import setup, find_packages
 import versioneer
 
 with open('README.rst') as readme_file:
@@ -18,33 +18,35 @@ test_requirements = [
     'nosetests>=1.3.7',
 ]
 
+NAME = "MDRun"
+VERSION = "0.1.1"
+ISRELEASED = False
+__version = VERSION
+
+
 setup(
-    name='MDRun',
-    version=versioneer.get_version(),
+    name=NAME,
+    version=VERSION,
     cmdclass=versioneer.get_cmdclass(),
     description="Submission of MD runs to HPC with PBS",
     long_description=readme + '\n\n' + history,
     author="Juan Eiros",
     author_email='jeirosz@gmail.com',
-    url='https://github.com/jeiros/JobSubmitter',
-    download_url='https://github.com/jeiros/JobSubmitter/archive/%s.tar.gz' % versioneer.get_version(),
-    packages=[
-        'JobSubmitter',
-    ],
-    package_dir={'JobSubmitter':
-                 'JobSubmitter'},
+    url='https://github.com/jeiros/%s'% NAME,
+    download_url='https://github.com/cxhernandez/%s/tarball/master'% NAME,
+    packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'JobSubmitter=JobSubmitter.cli:main'
+            'mdrun=mdrun.cli:main'
         ]
     },
     scripts=['bin/launch_PBS_jobs'],
-    package_data={'JobSubmitter': ['data/*']},
+    package_data={'MDRun': ['data/*']},
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",
     zip_safe=False,
-    keywords='JobSubmitter',
+    keywords='MD',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',

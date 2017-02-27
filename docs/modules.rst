@@ -1,7 +1,7 @@
-JobSubmitter
+MDRun
 ============
 
 .. toctree::
    :maxdepth: 4
 
-   JobSubmitter
+   MDRun

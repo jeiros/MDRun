@@ -5,7 +5,7 @@ import click
 import json
 import os
 import shutil
-from JobSubmitter.Simulation import Simulation
+from mdrun.Simulation import Simulation
 
 
 @click.group()

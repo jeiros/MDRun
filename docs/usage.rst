@@ -6,13 +6,13 @@ Basic workflow
 --------------
 
 Select your settings in the JSON file. There is an example file ``input_example.json``.
-You can also generate an input example file with ``JobSubmitter skeleton``.
+You can also generate an input example file with ``mdrun skeleton``.
 
 The code uses Python 3. Test your Python version in your machine with ``python --version``.
 
 Then, use the program with::
 
-    JobSubmitter generate_scripts input_example.json
+    mdrun generate_scripts input_example.json
 
 This will generate a series of ``.pbs`` files that have to be copied to the HPC along with the ``launch_PBS_jobs`` script and the appropriate
 files to run the MD job (topology, any restart/inpcrd files, as well as the input files with the MD settings.)

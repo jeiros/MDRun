@@ -1,29 +1,29 @@
-JobSubmitter package
+MDRun package
 ====================
 
 Submodules
 ----------
 
-JobSubmitter.SchedulingEngine module
+MDRun.SchedulingEngine module
 ------------------------------------
 
-.. automodule:: JobSubmitter.SchedulingEngine
+.. automodule:: MDRun.SchedulingEngine
     :members:
     :undoc-members:
     :show-inheritance:
 
-JobSubmitter.Simulation module
+MDRun.Simulation module
 ------------------------------
 
-.. automodule:: JobSubmitter.Simulation
+.. automodule:: MDRun.Simulation
     :members:
     :undoc-members:
     :show-inheritance:
 
-JobSubmitter.cli module
+MDRun.cli module
 -----------------------
 
-.. automodule:: JobSubmitter.cli
+.. automodule:: MDRun.cli
     :members:
     :undoc-members:
     :show-inheritance:
@@ -32,7 +32,7 @@ JobSubmitter.cli module
 Module contents
 ---------------
 
-.. automodule:: JobSubmitter
+.. automodule:: MDRun
     :members:
     :undoc-members:
     :show-inheritance:
