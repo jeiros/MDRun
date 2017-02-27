@@ -32,8 +32,8 @@ setup(
     long_description=readme + '\n\n' + history,
     author="Juan Eiros",
     author_email='jeirosz@gmail.com',
-    url='https://github.com/jeiros/%s'% NAME,
-    download_url='https://github.com/cxhernandez/%s/tarball/master'% NAME,
+    url='https://github.com/jeiros/%s' % NAME,
+    download_url='https://github.com/cxhernandez/%s/tarball/master' % NAME,
     packages=find_packages(),
     entry_points={
         'console_scripts': [

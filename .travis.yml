@@ -14,7 +14,7 @@ install:
   - pip install coveralls
 
 # command to run tests, e.g. python setup.py test
-script: nosetests --with-coverage --cover-package=JobSubmitter
+script: nosetests --with-coverage --cover-package=MDRun
 
 # After you create the Github repo and add it to Travis, run the
 # travis_pypi_setup.py script to finish PyPI deployment setup
@@ -26,7 +26,7 @@ script: nosetests --with-coverage --cover-package=JobSubmitter
 #     secure: PLEASE_REPLACE_ME
 #   on:
 #     tags: true
-#     repo: jeiros/JobSubmitter
+#     repo: jeiros/MDRun
 #     condition: $TOXENV == py27
 
 notifications:

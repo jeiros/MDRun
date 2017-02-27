@@ -15,3 +15,6 @@ recursive-include docs *.rst conf.py Makefile make.bat *.jpg *.png *.gif
 include versioneer.py
 include JobSubmitter/__init__.py
 include JobSubmitter/_version.py
+
+include bin/*
+include data/*

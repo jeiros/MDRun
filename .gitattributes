@@ -1,2 +1,2 @@
-JobSubmitter/__init__.py export-subst
-JobSubmitter/_version.py export-subst
+MDRun/__init__.py export-subst
+MDRun/_version.py export-subst

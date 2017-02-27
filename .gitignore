@@ -67,6 +67,5 @@ target/
 # Submission files
 *.pbs
 
-.github/
 
 .idea/
