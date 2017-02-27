@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
-import versioneer
+
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
@@ -20,20 +20,19 @@ test_requirements = [
 
 
 NAME = "MDRun"
-VERSION = versioneer.get_version()
+VERSION = '0.1.2'
 
 
 setup(
     name=NAME,
     version=VERSION,
-    cmdclass=versioneer.get_cmdclass(),
     description="Submission of MD runs to HPC with PBS",
     long_description=readme + '\n\n' + history,
     author="Juan Eiros",
     author_email='jeirosz@gmail.com',
     url='https://github.com/jeiros/%s' % NAME,
-    download_url='https://github.com/jeiros/%s/tarball/master' % NAME,
-    packages=find_packages(),
+    download_url='https://github.com/jeiros/%s/archive/%s.tar.gz' % (NAME, VERSION),
+    packages=find_packages(exclude=['docs', 'tests*']),
     entry_points={
         'console_scripts': [
             'mdrun=mdrun.cli:main'
