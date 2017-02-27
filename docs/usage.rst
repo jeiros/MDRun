@@ -6,6 +6,7 @@ Basic workflow
 --------------
 
 Select your settings in the JSON file. There is an example file ``input_example.json``.
+You can also generate an input example file with ``JobSubmitter skeleton``.
 
 The code uses Python 3. Test your Python version in your machine with ``python --version``.
 

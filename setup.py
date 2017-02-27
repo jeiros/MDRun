@@ -11,11 +11,9 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     'Click>=6.0',
-    # TODO: put package requirements here
 ]
 
 test_requirements = [
-    # TODO: put package test requirements here
     'nosetests>=1.3.7',
 ]
 
@@ -38,6 +36,7 @@ setup(
         ]
     },
     scripts=['bin/launch_PBS_jobs'],
+    package_data={'JobSubmitter': ['data/*']},
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",
@@ -48,9 +47,6 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
-        "Programming Language :: Python :: 2",
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
