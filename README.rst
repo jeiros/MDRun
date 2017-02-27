@@ -4,7 +4,7 @@ Job Submitter
 
 
 .. image:: https://img.shields.io/pypi/v/JobSubmitter.svg
-        :target: https://pypi.python.org/pypi/JobSubmitter
+        :target: https://pypi.python.org/pypi/mdrun
 
 .. image:: https://img.shields.io/travis/jeiros/JobSubmitter.svg
         :target: https://travis-ci.org/jeiros/JobSubmitter
@@ -12,10 +12,6 @@ Job Submitter
 .. image:: https://readthedocs.org/projects/JobSubmitter/badge/?version=latest
         :target: https://JobSubmitter.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
-
-.. image:: https://pyup.io/repos/github/jeiros/JobSubmitter/shield.svg
-     :target: https://pyup.io/repos/github/jeiros/JobSubmitter/
-     :alt: Updates
 
 .. image:: https://coveralls.io/repos/github/jeiros/JobSubmitter/badge.svg?branch=master
         :target: https://coveralls.io/github/jeiros/JobSubmitter?branch=master

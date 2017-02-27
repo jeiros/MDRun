@@ -18,13 +18,14 @@ test_requirements = [
 ]
 
 setup(
-    name='JobSubmitter',
+    name='MDRun',
     version='0.1.0',
     description="Submission of MD runs to HPC with PBS",
     long_description=readme + '\n\n' + history,
     author="Juan Eiros",
-    author_email='juaneiros@hotmail.com',
+    author_email='jeirosz@gmail.com',
     url='https://github.com/jeiros/JobSubmitter',
+    download_url='https://github.com/jeiros/JobSubmitter/archive/0.1.tar.gz',
     packages=[
         'JobSubmitter',
     ],
