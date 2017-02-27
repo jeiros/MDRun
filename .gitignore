@@ -68,3 +68,5 @@ target/
 *.pbs
 
 .github/
+
+.idea/
