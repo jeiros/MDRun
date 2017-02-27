@@ -13,9 +13,9 @@ import os
 import sys
 import unittest
 from contextlib import contextmanager
-import JobSubmitter
-from JobSubmitter import Simulation
-from JobSubmitter import cli
+import mdrun
+from mdrun import Simulation
+from mdrun import cli
 import nose.tools
 
 

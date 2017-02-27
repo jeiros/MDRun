@@ -13,8 +13,8 @@ import sys
 import unittest
 from contextlib import contextmanager
 from click.testing import CliRunner
-import JobSubmitter
-from JobSubmitter import cli
+import mdrun
+from mdrun import cli
 
 
 class TestCLI(object):
