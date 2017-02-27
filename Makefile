@@ -54,8 +54,8 @@ test: ## run tests quickly with the default Python
 	
 		python setup.py test
 
-test-all: ## run tests on every Python version with tox
-	tox
+test-all: ## run tests on every Python version with nosetests
+	nosetests
 
 coverage: ## check code coverage quickly with the default Python
 	
