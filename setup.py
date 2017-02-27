@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup
+import versioneer
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
@@ -19,13 +20,14 @@ test_requirements = [
 
 setup(
     name='MDRun',
-    version='0.1.1',
+    version=versioneer.get_version(),
+    cmdclass=versioneer.get_cmdclass(),
     description="Submission of MD runs to HPC with PBS",
     long_description=readme + '\n\n' + history,
     author="Juan Eiros",
     author_email='jeirosz@gmail.com',
     url='https://github.com/jeiros/JobSubmitter',
-    download_url='https://github.com/jeiros/JobSubmitter/archive/0.1.1.tar.gz',
+    download_url='https://github.com/jeiros/JobSubmitter/archive/%s.tar.gz' % versioneer.get_version(),
     packages=[
         'JobSubmitter',
     ],
