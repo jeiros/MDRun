@@ -19,7 +19,7 @@ test_requirements = [
 ]
 
 
-NAME = "MDRun"
+NAME = "mdrun"
 VERSION = '0.1.3'
 
 
@@ -38,7 +38,7 @@ setup(
             'mdrun=mdrun.cli:main'
         ]
     },
-    scripts=['bin/launch_PBS_jobs'],
+    scripts=['mdrun/bin/launch_PBS_jobs'],
     package_data={'mdrun': ['data/*']},
     include_package_data=True,
     install_requires=requirements,

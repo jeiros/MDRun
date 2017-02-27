@@ -29,7 +29,7 @@ def skeleton():
     """Get an example example.json input file."""
     click.echo('Printing example.json file')
     script_dir = os.path.dirname(__file__)  # Absolute path the script is in
-    relative_path = '../data/input_example.json'
+    relative_path = 'data/input_example.json'
     shutil.copyfile(
         os.path.join(script_dir, relative_path), './input_example.json')
 

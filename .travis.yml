@@ -15,7 +15,9 @@ install:
   - pip install coveralls
 
 # command to run tests, e.g. python setup.py test
-script: nosetests --with-coverage --cover-package=MDRun
+script:
+  - cd mdrun
+  - nosetests --with-coverage --cover-package=mdrun
 
 # After you create the Github repo and add it to Travis, run the
 # travis_pypi_setup.py script to finish PyPI deployment setup
