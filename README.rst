@@ -3,7 +3,7 @@ MDRun
 ===============================
 
 
-.. image:: https://img.shields.io/pypi/v/JobSubmitter.svg
+.. image:: https://img.shields.io/pypi/v/mdrun.svg
         :target: https://pypi.python.org/pypi/mdrun
 
 .. image:: https://travis-ci.org/jeiros/MDRun.svg?branch=master
