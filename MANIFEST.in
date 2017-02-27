@@ -17,4 +17,4 @@ include JobSubmitter/__init__.py
 include JobSubmitter/_version.py
 
 include bin/*
-include data/*
+include data/*include mdrun/_version.py

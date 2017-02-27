@@ -18,10 +18,9 @@ test_requirements = [
     'nosetests>=1.3.7',
 ]
 
+
 NAME = "MDRun"
-VERSION = "0.1.1"
-ISRELEASED = False
-__version = VERSION
+VERSION = versioneer.get_version()
 
 
 setup(
@@ -33,7 +32,7 @@ setup(
     author="Juan Eiros",
     author_email='jeirosz@gmail.com',
     url='https://github.com/jeiros/%s' % NAME,
-    download_url='https://github.com/cxhernandez/%s/tarball/master' % NAME,
+    download_url='https://github.com/jeiros/%s/tarball/master' % NAME,
     packages=find_packages(),
     entry_points={
         'console_scripts': [

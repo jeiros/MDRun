@@ -4,5 +4,6 @@ __author__ = """Juan Eiros"""
 __email__ = 'jeirosz@gmail.com'
 
 
-from .version import version as _version
-__version__ = _version
+from ._version import get_versions
+__version__ = get_versions()['version']
+del get_versions
