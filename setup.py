@@ -20,7 +20,7 @@ test_requirements = [
 
 
 NAME = "MDRun"
-VERSION = '0.1.2'
+VERSION = '0.1.2.1'
 
 
 setup(
@@ -39,7 +39,7 @@ setup(
         ]
     },
     scripts=['bin/launch_PBS_jobs'],
-    package_data={'MDRun': ['data/*']},
+    package_data={'mdrun': ['data/*']},
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",
