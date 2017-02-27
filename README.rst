@@ -6,8 +6,8 @@ MDRun
 .. image:: https://img.shields.io/pypi/v/JobSubmitter.svg
         :target: https://pypi.python.org/pypi/mdrun
 
-.. image:: https://img.shields.io/travis/jeiros/JobSubmitter.svg
-        :target: https://travis-ci.org/jeiros/JobSubmitter
+.. image:: https://travis-ci.org/jeiros/MDRun.svg?branch=master
+    :target: https://travis-ci.org/jeiros/MDRun
 
 .. image:: https://readthedocs.org/projects/JobSubmitter/badge/?version=latest
         :target: https://JobSubmitter.readthedocs.io/en/latest/?badge=latest
