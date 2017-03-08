@@ -1,0 +1,4 @@
+[Spacing]
+files = **/*.py
+bears = SpaceConsistencyBear, PEP8Bear, PyFlakesBear
+use_spaces = True

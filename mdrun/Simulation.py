@@ -1,5 +1,4 @@
 from .SchedulingEngine import PBSEngine
-import sys
 
 
 class Simulation(object):

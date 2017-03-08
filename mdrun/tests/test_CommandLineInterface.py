@@ -9,11 +9,7 @@ Tests for the command line interface
 """
 
 
-import sys
-import unittest
-from contextlib import contextmanager
 from click.testing import CliRunner
-import mdrun
 from mdrun import cli
 
 

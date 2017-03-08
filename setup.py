@@ -31,7 +31,8 @@ setup(
     author="Juan Eiros",
     author_email='jeirosz@gmail.com',
     url='https://github.com/jeiros/%s' % NAME,
-    download_url='https://github.com/jeiros/%s/archive/%s.tar.gz' % (NAME, VERSION),
+    download_url='https://github.com/jeiros/%s/archive/%s.tar.gz' % (
+        NAME, VERSION),
     packages=find_packages(exclude=['docs', 'tests*']),
     entry_points={
         'console_scripts': [
