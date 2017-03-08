@@ -100,10 +100,8 @@ class Simulation(object):
                                         self.system_name)
         rendered_commands += self._generate_final_cmds()
 
-        file = open("%s_job%s.pbs" % (self.system_name,
-                                      str(sim_number).zfill(2)), "w")
-        file.write(rendered_commands)
-        file.close()
+        with open("%s_job%s.pbs" % (self.system_name, str(sim_number).zfill(2)), "w") as file:
+            file.write(rendered_commands)
 
     def _write_first_step_file(self, time_interval):
         simulation_cmds_rendered = self.sch_headers
@@ -131,10 +129,8 @@ class Simulation(object):
                                         self.system_name)
         simulation_cmds_rendered += self._generate_final_cmds()
 
-        file = open("%s_job%s.pbs" % (self.system_name,
-                                      str(1).zfill(2)), "w")
-        file.write(simulation_cmds_rendered)
-        file.close()
+        with open("%s_job%s.pbs" % (self.system_name, str(1).zfill(2)), "w") as file:
+            file.write(simulation_cmds_rendered)
 
     def _write_pre_simulation_CPUfile(self):
         """Write a bash script to do the pre simulation commands as specified
@@ -149,9 +145,8 @@ class Simulation(object):
         for cmd in self.pre_simulation_cmd:
             pre_simulation_cmds_rendered += cmd + "\n"
 
-        file = open("pre_simulation.sh", "w")
-        file.write(pre_simulation_cmds_rendered)
-        file.close()
+        with open("pre_simulation.sh", "w") as file:
+            file.write(pre_simulation_cmds_rendered)
 
     def _generate_preliminary_cmds(self, time_interval):
         """Return the usual commands that every run uses."""
