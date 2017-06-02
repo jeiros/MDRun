@@ -1,10 +1,12 @@
 class SchedulingEngine:
+
     def __init__(self, simulation):
         self.pbs_headers = ""
         self.simulation = simulation
 
 
 class PBSEngine(SchedulingEngine):
+
     def generate_headers(self):
         if self.simulation.is_HPCjob:
             self.pbs_headers = "#PBS -lselect=%s:" % self.simulation.nnodes
@@ -23,7 +25,7 @@ class PBSEngine(SchedulingEngine):
                 self.pbs_headers += "host=%s\n" % self.simulation.host
 
             self.pbs_headers += "#PBS -lwalltime=%s\n" % self.simulation.walltime
-            self.pbs_headers += "#PBS -q %s\n\n" % self.simulation.queue
+            self.pbs_headers += "#PBS -q %s\n" % self.simulation.queue
         else:
             self.pbs_headers = "#PBS -l nodes=%s" % self.simulation.host
             self.pbs_headers += ":gpus=%s:ppn=%s\n" % (self.simulation.ngpus,
@@ -31,7 +33,7 @@ class PBSEngine(SchedulingEngine):
             self.pbs_headers += "#PBS -l mem=%s\n" % self.simulation.memory
             self.pbs_headers += "#PBS -l walltime=%s\n" % self.simulation.walltime
             self.pbs_headers += "#PBS -q %s\n" % self.simulation.queue
-            self.pbs_headers += "#PBS -j oe\n\n"
+        self.pbs_headers += "#PBS -j oe\n\n"
 
         return(self.pbs_headers)
 
