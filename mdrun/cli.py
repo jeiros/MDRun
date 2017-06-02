@@ -16,7 +16,7 @@ def main():
 
 @main.command()
 @click.argument('json_file', type=click.Path(exists=True))
-def generate_scripts(json_file):
+def generate(json_file):
     """Read the JSON_FILE and write the PBS files"""
     json_file = click.format_filename(json_file)
     settings = read_jsonfile(json_file)
