@@ -36,7 +36,7 @@ class TestCLI(object):
                                               'walltime': '72:0:0'},
                              'scheduler': 'pbs',
                              'simulation_details': {'binary_location': '/path/to/AMBERHOME/bin/pmemd.cuda_SPFP',
-                                                    'cuda_version': '7.5.18',
+                                                    'cuda_version': '8.0.44',
                                                     'final_time': 500,
                                                     'inpcrd_file': 'protein1.inpcrd',
                                                     'input_file': 'Production_cmds.in',

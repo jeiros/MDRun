@@ -21,7 +21,7 @@
         "final_time": 500,
         "job_length": 50,
         "job_directory": "/work/username/protein1",
-        "cuda_version": "7.5.18",
+        "cuda_version": "8.0.44",
         "binary_location": "/path/to/AMBERHOME/bin/pmemd.cuda_SPFP",
         "pre_simulation_cmd": [
             "/path/to/AMBERHOME/bin/pmemd.cuda_SPFP -O -i premin.in -o premin.out -c ${inpcrd} -p ${prmtop} -r premin.rst -ref ${inpcrd}",
