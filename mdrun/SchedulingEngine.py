@@ -20,12 +20,12 @@ class PBSEngine(SchedulingEngine):
                 self.pbs_headers += "host=%s\n" % self.simulation.host
             else:
                 print("""Queue wasn't gpgpu or pqigould. Assume nothing and print
-                      in the PBS header both the gpu_type and the host.\n""")
+                      in the PBS header the gpu_type.\n""")
                 self.pbs_headers += "gpu_type=%s\n" % self.simulation.gpu_type
-                self.pbs_headers += "host=%s\n" % self.simulation.host
 
             self.pbs_headers += "#PBS -lwalltime=%s\n" % self.simulation.walltime
-            self.pbs_headers += "#PBS -q %s\n" % self.simulation.queue
+            if self.simulation.queue is not None:
+                self.pbs_headers += "#PBS -q %s\n" % self.simulation.queue
         else:
             self.pbs_headers = "#PBS -l nodes=%s" % self.simulation.host
             self.pbs_headers += ":gpus=%s:ppn=%s\n" % (self.simulation.ngpus,
