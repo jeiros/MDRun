@@ -21,6 +21,7 @@ def generate(json_file):
     json_file = click.format_filename(json_file)
     settings = read_jsonfile(json_file)
     simulation = Simulation(settings)
+    click.echo('Job length = {}'.format(simulation.job_length))
     simulation.writeSimulationFiles()
 
 
