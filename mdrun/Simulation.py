@@ -78,7 +78,7 @@ class Simulation(object):
         rendered_commands = self.sch_headers
         rendered_commands += self._generate_preliminary_cmds(time_interval)
 
-        if (sim_number == 1):
+        if sim_number == 1:
             rendered_commands += "prevrst=%s\n" % self.start_rst
         else:
             rendered_commands += "prevrst=%s_%sns.rst\n" % (self.system_name,
@@ -110,7 +110,8 @@ class Simulation(object):
         simulation_cmds_rendered += "inpcrd=%s\n" % self.inpcrd_file
         simulation_cmds_rendered += self.scheduler.get_work_directory_cmd()
         simulation_cmds_rendered += "cp %s/*.in .\n" % self.job_directory
-        simulation_cmds_rendered += "cp %s/*.rst .\n" % self.job_directory
+        if not self.start_time == 0:
+            simulation_cmds_rendered += "cp %s/*.rst .\n" % self.job_directory
         simulation_cmds_rendered += "cp %s/${prmtop} .\n" % self.job_directory
         simulation_cmds_rendered += "cp %s/${inpcrd} .\n\n" % self.job_directory
 
