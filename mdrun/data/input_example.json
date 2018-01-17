@@ -21,12 +21,14 @@
         "final_time": 500,
         "job_length": 50,
         "job_directory": "/work/username/protein1",
-        "cuda_version": "8.0.44",
+        "cuda_version": "9.0",
         "binary_location": "/path/to/AMBERHOME/bin/pmemd.cuda_SPFP",
         "pre_simulation_cmd": [
-            "/path/to/AMBERHOME/bin/pmemd.cuda_SPFP -O -i premin.in -o premin.out -c ${inpcrd} -p ${prmtop} -r premin.rst -ref ${inpcrd}",
-            "/path/to/AMBERHOME/bin/pmemd.cuda_SPFP -O -i sandermin1.in -o sandermin1.out -c premin.rst -p ${prmtop} -r sandermin1.rst",
-            "/path/to/AMBERHOME/bin/pmemd.cuda_SPFP -O -i 02_Heat.in -o 02_Heat.out -c sandermin1.rst -p ${prmtop} -r 02_Heat.rst -ref sandermin1.rst -x 02_Heat.nc",
+            "/path/to/AMBERHOME/bin/pmemd.cuda_SPFP -O -i min1.in -o min1.out -c ${inpcrd} -p ${prmtop} -r min1.rst -ref ${inpcrd}",
+            "/path/to/AMBERHOME/bin/pmemd.cuda_SPFP -O -i min2.in -o min2.out -c ${inpcrd} -p ${prmtop} -r min2.rst -ref min1.rst",
+            "/path/to/AMBERHOME/bin/pmemd.cuda_SPFP -O -i min3.in -o min3.out -c ${inpcrd} -p ${prmtop} -r min3.rst -ref min2.rst",
+
+            "/path/to/AMBERHOME/bin/pmemd.cuda_SPFP -O -i 02_Heat.in -o 02_Heat.out -c min3.rst -p ${prmtop} -r 02_Heat.rst -ref min3.rst -x 02_Heat.nc",
             "/path/to/AMBERHOME/bin/pmemd.cuda_SPFP -O -i 03_Heat2.in -o 03_Heat2.out -c 02_Heat.rst -p ${prmtop} -r Heated_eq.rst -ref 02_Heat.rst -x 03_Heat2.nc"
         ],
         "pre_simulation_type": "gpu"
