@@ -154,7 +154,7 @@ class Simulation(object):
         prelim_cmds = ""
         if self.is_HPCjob:
             prelim_cmds += "module load cuda/%s\n" % self.cuda_version
-            prelim_cmds += "module load intel-suite\n\n"
+            prelim_cmds += "module load gcc/5.4.0\n\n"
         prelim_cmds += "prmtop=%s\n" % self.topology_file
         prelim_cmds += "sim=%s\n\n" % time_interval
         return(prelim_cmds)
