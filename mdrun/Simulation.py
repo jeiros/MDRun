@@ -98,7 +98,7 @@ class Simulation(object):
                                         self.system_name,
                                         self.system_name,
                                         self.system_name)
-        rendered_commands += self._generate_final_cmds()
+        rendered_commands += self._generate_final_cmds(sim_number)
 
         with open("%s_job%s.pbs" % (self.system_name, str(sim_number).zfill(2)), "w") as file:
             file.write(rendered_commands)
@@ -159,7 +159,7 @@ class Simulation(object):
         prelim_cmds += "sim=%s\n\n" % time_interval
         return(prelim_cmds)
 
-    def _generate_final_cmds(self):
+    def _generate_final_cmds(self, sim_number):
         """Write the commands after the production run. The first copy and remove
         commands are scheduler-specific and are implemented in the corresponding
         engine class."""
@@ -175,6 +175,10 @@ class Simulation(object):
                       self.destination)
         if not self.is_HPCjob:
             final_cmds += "rm -rf /tmp/pbs.${PBS_JOBID}/\n"
+
+        if self.is_HPCjob and sim_number < len(self.times):
+            final_cmds += "cd $PBS_O_WORKDIR\n"
+            final_cmds += "qsub %s_job%s.pbs\n" % (self.system_name, str(sim_number + 1).zfill(2))
         return(final_cmds)
 
     def _get_NumberOfJobs(self):

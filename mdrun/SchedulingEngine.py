@@ -24,7 +24,7 @@ class PBSEngine(SchedulingEngine):
                 self.pbs_headers += "gpu_type=%s\n" % self.simulation.gpu_type
 
             self.pbs_headers += "#PBS -lwalltime=%s\n" % self.simulation.walltime
-            if self.simulation.queue is not None:
+            if self.simulation.queue != "":
                 self.pbs_headers += "#PBS -q %s\n" % self.simulation.queue
         else:
             self.pbs_headers = "#PBS -l nodes=%s" % self.simulation.host
