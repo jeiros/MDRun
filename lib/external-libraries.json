@@ -1,7 +1,15 @@
 {
-  "gitReferences": {},
+  "gitReferences": {
+    "mdrun": {
+      "remote": "git@github.com:jeiros/MDRun.git",
+      "checkout": "master",
+      "remotePath": "",
+      "isDirty": false
+    }
+  },
   "pythonPath": [
-    "python"
+    "python",
+    "mdrun"
   ],
   "rsrcPath": [
     "R"
