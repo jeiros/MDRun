@@ -4,6 +4,10 @@
       "remote": "git@github.com:jeiros/MDRun.git",
       "checkout": "master",
       "remotePath": "",
+      "lastHash": "a01b622534703e9563392968d8d0426f82766d23",
+      "conflictingFiles": [],
+      "resolvedFiles": [],
+      "faultyHash": "",
       "isDirty": false
     }
   },

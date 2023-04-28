@@ -1,0 +1,3 @@
+MDRun/__init__.py export-subst
+MDRun/_version.py export-subst
+mdrun/_version.py export-subst
